@@ -1,0 +1,7 @@
+<!-- 小程序收藏组件，更多高级用法请参考文档：https://docs.alipay.com/mini/component/component-favorite -->
+<favorite type = 'tips' bottom = '0rpx'>收藏小程序，下次使用更方便</favorite>
+
+<view>
+  <button onTap="sayHello">点我啊</button>
+  <text>从服务端返回数据</text>
+</view>

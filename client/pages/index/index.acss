@@ -1,0 +1,21 @@
+view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(51, 51, 57);
+}
+
+button {
+  display: block;
+  width: 300rpx;
+  background-color: rgb(51, 51, 57);
+  color: #FFF;
+  border-radius: 50rpx;
+}
+
+text {
+  margin-top: 50rpx;
+  color: #999;
+}
