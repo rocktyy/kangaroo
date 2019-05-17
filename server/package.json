@@ -1,13 +1,15 @@
 {
   "name": "demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "egg demo",
   "private": true,
   "dependencies": {
-    "egg": "^2.2.1",
-    "egg-mysql": "^3.0.0",
+    "alipay-sdk": "^3.0.4",
+    "egg": "^2.14.1",
     "egg-mongoose": "^3.1.0",
-    "egg-scripts": "^2.5.0"
+    "egg-mysql": "^3.0.0",
+    "egg-scripts": "^2.5.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "autod": "^3.0.1",
