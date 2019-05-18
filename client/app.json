@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/send_back/send_back",
+    "pages/apply/apply",
     "pages/index/index"
   ],
   "window": {

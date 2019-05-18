@@ -1,0 +1,57 @@
+<view class="page">
+  <view class="page-top-img"></view>
+  <view class="page-content">回寄信息填写</view
+  <view class="page-section">
+    <view class="form-row">
+      <view class="form-row-label">申请人姓名：</view>
+      <view class="form-row-content">
+        <input class="input" placeholder="申请座椅回寄时填写" />
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-row-label">联系电话：</view>
+      <view class="form-row-content">
+        <input class="input" />
+      </view>
+    </view>
+
+    <view class="form-row">
+      <view class="form-row-label">寄件人地址：</view>
+      <view class="form-row-content">
+        <input class="input" />
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-row-content">
+        <picker onChange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="row">
+            <view class="row-title">快递公司：</view>
+            <view class="row-extra">当前选择：{{array[index]}}</view>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="form-row">
+      <view class="form-row-label">运单号：</view>
+      <view class="form-row-content">
+        <input class="input" />
+      </view>
+    </view>
+
+    <view class="send-address">
+      <view class="form-title">回寄信息填写</view>
+      <view class="form-label"> 收件人：车影工场</view>
+      <view class="form-label"> 电话： 186xxxx0001</view>
+      <view class="form-label"> 快递地址：北京市朝阳区幸福中路锦绣园公寓D座318室</view>
+    </view>
+    
+    <view>
+      <button form-type="submit" class="send-back-button" onTap="submit">提交</button>
+    </view>
+
+    <view class="footer">
+      <view class="footer-title"> {{ footerTitle }} </view>
+      <view class="footer-content"> {{ footerContent }} </view>
+    </view>
+  </view>
+</view>

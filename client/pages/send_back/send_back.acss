@@ -1,0 +1,51 @@
+page {
+  background-color: rgb(32, 211, 207);
+}
+
+
+.row {
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+
+.row-title {
+  flex: 1;
+  color: #000;
+}
+
+.row-extra {
+  flex-basis: initial;
+  color: #888;
+}
+
+.send-address{
+  margin-top:  30rpx;
+  margin-left: 30rpx;
+  color: rgb(65, 65, 65)
+}
+.form-title {
+  margin-bottom: 10rpx;
+  color: #fff
+}
+.form-lable {
+  line-height: 1.2;
+  margin-bottom: 6rpx;
+}
+
+.send-back-button {
+  letter-spacing: 16rpx;
+  font-size: 48rpx;
+  color: #fff;
+  border-radius: 50rpx;
+  background-color: rgb(216, 112, 216);
+}
+
+.footer{
+  width: 90%;
+  line-height: 1.2;
+  margin: 0 auto;
+  font-size: 24rpx;
+  color: #fff;
+  text-align: center;
+}

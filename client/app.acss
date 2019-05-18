@@ -1,5 +1,71 @@
 page {
+  box-sizing: border-box;
+}
+
+.page {
+  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+  font-size: 24rpx;
+  padding: 32rpx;
   flex: 1;
+}
+
+.page-content{
+  font-weight: bold;
+  font-size: 40rpx;
+  color: rgb(72, 66, 66);
+  letter-spacing: 2rpx;
+  margin-bottom: 36rpx;
+  text-align: center;
+}
+
+.page-description {
+  font-size: 32rpx;
+  color: rgb(72, 66, 66);
+  margin-bottom: 16rpx;
+}
+
+.page-section {
+  margin-bottom: 32rpx;
+}
+
+.page-section-title {
+  padding: 16rpx 32rpx;
+}
+
+button {
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+}
+
+.form-row {
   display: flex;
-  background: #f7f7f7;
+  align-items: center;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  padding: 0 30rpx;
+  height: 80rpx;
+  font-size: 24rpx;
+  align-items: center;
+  background: #fff;
+}
+
+.form-row-label {
+  width: 180rpx;
+  font-size: 28rpx;
+  margin-right: 10rpx;
+  text-align: left;
+  color: #000;
+}
+
+.form-row-label-large {
+  width: 240rpx;
+  font-size: 28rpx;
+  margin-right: 10rpx;
+  text-align: left;
+  color: #000;
+}
+
+.form-row-content {
+  flex: 1;
+  font-size: 34rpx;
 }

@@ -1,0 +1,36 @@
+page {
+  background-color: rgb(32, 211, 207);
+}
+
+.sms-block, .birth-certificate {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.sms-tips, .certificate-info {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 26rpx;
+  color: rgb(216, 112, 216);
+}
+
+.sms-tips {
+  width: 25%;
+}
+
+.certificate-info {
+  width: 25%;
+  text-decoration:underline;
+}
+
+.apply-button {
+  letter-spacing: 16rpx;
+  font-size: 48rpx;
+  color: #fff;
+  border-radius: 50rpx;
+  background-color: rgb(216, 112, 216);
+}
+
