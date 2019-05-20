@@ -69,3 +69,12 @@ button {
   flex: 1;
   font-size: 34rpx;
 }
+
+
+.submit-button {
+  letter-spacing: 16rpx;
+  font-size: 48rpx;
+  color: #fff;
+  border-radius: 50rpx;
+  background-color: rgb(216, 112, 216);
+}

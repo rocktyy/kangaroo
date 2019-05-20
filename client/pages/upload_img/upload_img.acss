@@ -1,0 +1,33 @@
+
+.allImgBox { 
+  width: 740rpx;
+  margin: 30rpx auto; 
+}
+.imgBox, .addImgBox { 
+  display: inline-block;
+  width: 140rpx;
+  height: 140rpx;
+  margin: 0 auto;
+  position: relative;
+  vertical-align: middle 
+}
+.imgBox image,.addImgBox text { 
+  width: 140rpx;
+  height: 140rpx;
+  border: 2rpx dotted #aaa 
+}
+.imgBox .delImg { 
+  position: absolute;
+  top: -20rpx; 
+  right: -20rpx;
+  height: 18px;
+  overflow: visible 
+}
+
+.addImgBox text { 
+  display: inline-block;
+  line-height: 140rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #aaa 
+}

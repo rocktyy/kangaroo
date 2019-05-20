@@ -1,0 +1,7 @@
+<view class="page">
+  <block a:for="{{agreement}}" a:key="{{item}}" a:index="{{index}}">
+    <view data-index="{{index}}" class="agreement">
+      {{ item }}
+    </view> 
+  </block>
+</view>

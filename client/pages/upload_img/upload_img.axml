@@ -1,0 +1,14 @@
+<view class="page">
+  <view class="allImgBox">
+      <block a:for="{{imgUrls}}" a:key="{{item}}" a:index="{{index}}" name="{{file}}" id="{{file}}">
+          <view class="imgBox">
+              <image src="{{item}}"></image>
+              <view data-index="{{index}}" onTap="delImg" class="delImg">
+                  <icon type="cancel" color="red" size="18" />
+              </view>
+          </view>
+      </block>
+      <view class="addImgBox" onTap="addImg" a:if="{{canAddImg}}"><text>{{addImgText}}</text></view>
+  </view>
+  <button type="default" onTap="toUploadImg" class="submit-button"> 提交 </button>
+</view>

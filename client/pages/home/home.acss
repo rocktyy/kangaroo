@@ -1,0 +1,48 @@
+page { 
+  background-color: rgb(51, 51, 51);
+}
+
+.page-home {
+  display: flex;
+  background: #FFF;
+  flex-direction: column;
+  width: 100%;
+  max-height: 100vh;
+}
+
+.header-img{
+  width: 100%;
+}
+
+.content{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.content-avatar {
+  width: 100%;
+  height: 718rpx;
+  margin-left:20rpx;
+  margin-right:20rpx;
+  align-self: center;
+}
+
+.content-apply, .content-return{
+  width: 80%;
+  margin: 20rpx auto;
+}
+
+.introduce {
+  width: 80%;
+  margin: 20rpx auto;
+} 
+
+.footer {
+  flex-shrink: 0; 
+  font-size: 24rpx;
+  text-align: center;
+}
+.footer-icon {
+  width: 476rpx;
+  height: 308rpx;
+}

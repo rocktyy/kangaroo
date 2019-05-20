@@ -1,32 +1,27 @@
-
-// 请修改为您的小程序云应用的真实域名
-const DOMAIN_NAME = 'app2137169189test.mapp-test.xyz';
+const app = getApp();
 
 Page({
-  onLoad(query) {
-    // 页面加载
-    console.info(`Page onLoad with query: ${JSON.stringify(query)}`);
+  data: {
+    background: ['green', 'red', 'yellow'],
+    indicatorDots: true,
+    autoplay: false,
+    interval: 3000,
+    applyButton:'申请安全座椅',
+    returnButton:'退还安全座椅',
   },
-  onReady() {
-    // 页面加载完成
-  },
-  onShow() {
-    // 页面显示
-  },
-  onHide() {
-    // 页面隐藏
-  },
-  onUnload() {
-    // 页面被关闭
-  },
-  onTitleClick() {
-    // 标题被点击
-  },
-  onPullDownRefresh() {
-    // 页面被下拉
-  },
-  onReachBottom() {
-    // 页面被拉到底部
+
+  onLoad() {
+    app.getUserInfo().then(
+      user => {
+        this.getTodoList().then(res=>{
+          this.setData({ todos: res.todoList });
+        })
+      },
+      () => {
+        // 获取用户信息失败
+        console.log("获取用户信息失败");
+      }
+    );
   },
   onShareAppMessage() {
     // 返回自定义分享信息
@@ -58,5 +53,15 @@ Page({
         })
       }
     });
-  }
-});
+  },
+  sendBack() {
+    var query = '../agreement/agreement?biz=home';
+    my.navigateTo({
+      url: query
+    })
+    my.alert({
+      content: JSON.stringify(query),
+    });
+  },
+})
+

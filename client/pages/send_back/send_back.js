@@ -15,7 +15,6 @@ Page({
     console.info(`Page onLoad with query: ${JSON.stringify(query)}`);
   },
   bindPickerChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value);
     this.setData({
       index: e.detail.value,
     });
@@ -29,15 +28,10 @@ Page({
           title: "寄送已经成功",
           content: res.data.data
         });
-        //小程序自定义埋点用法，详见 https://docs.alipay.com/mini/api/report
-        my.reportAnalytics('miniDemo', {
-          demoName: 'simple-node',
-          res: res
-        });
       },
       fail: (err) => {
         my.alert({
-          title: "错误信息",
+          title: "系统正忙",
           content: JSON.stringify(err)
         })
       }
