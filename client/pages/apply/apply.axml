@@ -11,7 +11,7 @@
       </view>
     </view>
     <view class="form-row">
-      <view class="form-row-label">微信号：</view>
+      <view class="form-row-label">微信号1：</view>
       <view class="form-row-content">
         <input class="input" />
       </view>
@@ -67,7 +67,7 @@
     <view class="form-row birth-certificate">
       <view class="form-row-label-large">宝宝出生证明：</view>
       <view class="form-row-content">
-        <label class="certificate-info" >点击上传</label>
+        <view class="certificate-info" onTap="uploadImg">点击上传</view>
       </view>
     </view>
   </view>

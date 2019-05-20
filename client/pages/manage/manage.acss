@@ -1,0 +1,36 @@
+page {
+  background-color: rgb(32, 211, 207);
+}
+.tab-header{
+  margin-left: -30rpx;
+}
+
+.dyt-list {
+  margin-top: 0;
+}
+.dyt-list .am-list-item-thumb {
+  border-radius: 5px;
+}
+.dyt-list .am-list-brief {
+  color: #909090;
+}
+
+.dyt-list .am-list-extra {
+  color: #000;
+}
+
+.am-list-sticky {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.apply-button {
+  letter-spacing: 16rpx;
+  font-size: 48rpx;
+  color: #fff;
+  border-radius: 50rpx;
+  background-color: rgb(216, 112, 216);
+}
+

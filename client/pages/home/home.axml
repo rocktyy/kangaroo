@@ -37,4 +37,22 @@
     <text>{{text}}</text>
   </view>
 
+  <modal
+		show="{{modalOpened4}}"
+		onModalClose="onModalClick4"
+		advice="{{true}}"
+		>
+		<view style="display: flex; width: 270px; height: 350px;">
+			<view class="background"
+				src="https://gw.alipayobjects.com/zos/rmsportal/vJzAWQLgeDLGOMKiIgZt.png"
+			>
+      <view>
+        <label><radio value="radio1" />radio1</label>
+      </view>
+      <view>
+        <button class="apply-button" onTap="authorize">{{authorizeButton}}</button>
+      </view>
+      </view>
+		</view>
+	</modal>
 </view>

@@ -8,6 +8,7 @@ Page({
     interval: 3000,
     applyButton:'申请安全座椅',
     returnButton:'退还安全座椅',
+    authorizeButton:'点击授权使用芝麻信用分',
   },
 
   onLoad() {

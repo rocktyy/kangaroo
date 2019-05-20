@@ -29,5 +29,11 @@ Page({
         })
       }
     });
-  }
+  },
+  uploadImg() {
+    var query = '../upload_img/upload_img?biz=apply';
+    my.navigateTo({
+      url: query
+    })
+  },
 });

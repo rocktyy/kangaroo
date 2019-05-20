@@ -9,7 +9,8 @@ Page({
     maxAddImgNum: 1,
     i: 0
   },
-  addImg: function () {    // 上传照片
+  addImg: function () {    
+    // 上传照片
     var that = this;
     my.chooseImage({
         count: that.data.maxAddImgNum,
@@ -51,11 +52,20 @@ Page({
           }
           that.setData({i: ii+1});
           that.uploadImg();
+          // 跳转到 上传页面
+          that.navigateTo();
         //     },
         // });
       }else{
         that.setData({i:0})
       }
+  },
+  navigateTo: function (msg) {
+    var app = getApp();
+    var query = '../apply/apply?biz=apply&msg='+msg;
+    my.navigateBack({
+      delta: 2
+    })
   },
   // 删除照片
   delImg: function (e) {
