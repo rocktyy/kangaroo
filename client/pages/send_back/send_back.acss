@@ -2,7 +2,6 @@ page {
   background-color: rgb(32, 211, 207);
 }
 
-
 .row {
   font-size: 28rpx;
   display: flex;

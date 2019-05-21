@@ -1,6 +1,4 @@
-
-// 请修改为您的小程序云应用的真实域名
-const DOMAIN_NAME = 'app2137169189test.mapp-test.xyz';
+const app = getApp();
 
 Page({
   data: {
@@ -19,22 +17,53 @@ Page({
       index: e.detail.value,
     });
   },
-  submit() {
-    console.log(my.canIUse('favorite'))
-    my.httpRequest({
-      url: `https://${DOMAIN_NAME}/say-hello`,
-      success: (res) => {
+
+  formSubmit(e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail)
+
+    var userId = '10001';
+    if (app.userInfo) {
+      userId = app.userInfo.userId;
+    }
+    console.log('Add todo to user>>>>>>>', userId);
+    this.addTodo({
+      ...e.detail.value,
+      userId: userId
+    }).then(res=>{
+      if(res.success){
         my.alert({
-          title: "寄送已经成功",
+          title: "回寄已经成功",
           content: res.data.data
         });
-      },
-      fail: (err) => {
-        my.alert({
-          title: "系统正忙",
-          content: JSON.stringify(err)
+      }else{
+        my.showToast({
+          content:'请求失败，请重试'
         })
       }
+    })    
+  },
+
+  // 写入数据库obj，当前用户增加一条todo
+  addTodo(obj) {
+    var theDemoDomain = app.demoDomain;
+    return new Promise(function (resolve, reject) {
+      my.request({
+        url: theDemoDomain+'/sendBack/add', 
+        method: 'POST',
+        data: obj,
+        dataType: 'json',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        success: (res) => {
+          resolve(res.data);
+        },
+        fail: function(res) {
+          console.log('Add todo fail>>>>>>>>', res)
+          reject();
+        }
+      });
     });
   }
+
 });

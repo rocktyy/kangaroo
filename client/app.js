@@ -2,8 +2,8 @@ App({
   userInfo: null,
   
   // demoDomain: 'https://xxxxxx.mapp-test.xyz',
-  // 本地调试
-  demoDomain: 'https://app2136429017test.mapp-test.xyz',
+  // 请修改为您的小程序云应用的真实域名
+  demoDomain: 'app2137169189test.mapp-test.xyz',
 
   getUserInfo() {
     var theDemoDomain = this.demoDomain;

@@ -1,0 +1,3 @@
+<view class="header">
+  <image class="header-img" src = {{src}} background-size="cover"></image> 
+</view>

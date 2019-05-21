@@ -1,5 +1,6 @@
+
+<header src="../../assets/back_top.png" />
 <view class="page">
-  <view class="page-top-img"></view>
   <view class="page-content">安全座椅申请表</view>
   <view class="page-description">申领人信息</view>
   

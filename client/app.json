@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/send_back/send_back",
     "pages/apply/apply",
+    "pages/home/home",
     "pages/manage/manage",
     "pages/agreement/agreement",
-    "pages/upload_img/upload_img",
-    "pages/send_back/send_back",
-    "pages/home/home"
+    "pages/upload_img/upload_img"
   ],
   "window": {
     "defaultTitle": "袋鼠行动",

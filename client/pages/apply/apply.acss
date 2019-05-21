@@ -1,5 +1,5 @@
 page {
-  background-color: rgb(32, 211, 207);
+  background-color: #29d7d4;
 }
 
 .sms-block, .birth-certificate {
