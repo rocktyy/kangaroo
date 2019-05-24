@@ -1,7 +1,7 @@
 'use strict';
 const Controller = require('egg').Controller; 
 
-class SendBackController extends Controller {
+class SendbackController extends Controller {
 
   async addAccount() {
     // 从请求消息体中取得task信息
@@ -11,13 +11,12 @@ class SendBackController extends Controller {
 
     // 将请求中的task转化为与数据库中结构一致的格式
     const newTask = {
-      label: text,
-      done: completed ? 1 : 0,
-      img_url: iconUrl === '' ? null : iconUrl,
+      name: name,
+      telephone_nm: telephone_nm,
       user_id: userId
     }
-    console.log("Task to be added >>>", newTask);
-    
+    console.log("send_back_info to be added >>>", newTask);
+
     // 向数据库插入数据
     const result = await this.app.mysql.insert('send_back_info', newTask);
     
@@ -29,4 +28,4 @@ class SendBackController extends Controller {
 
 }
 
-module.exports = SendBackController;
+module.exports = SendbackController;

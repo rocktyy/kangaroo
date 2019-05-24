@@ -16,11 +16,6 @@ Page({
           title: "来自云服务的问候",
           content: res.data.data
         });
-        //小程序自定义埋点用法，详见 https://docs.alipay.com/mini/api/report
-        my.reportAnalytics('miniDemo', {
-          demoName: 'simple-node',
-          res: res
-        });
       },
       fail: (err) => {
         my.alert({

@@ -1,7 +1,7 @@
 {
-  "name": "demo",
+  "name": "kangaroo",
   "version": "1.0.0",
-  "description": "egg demo",
+  "description": "kangaroo action",
   "private": true,
   "dependencies": {
     "alipay-sdk": "^3.0.4",
@@ -25,8 +25,8 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-demo",
-    "stop": "egg-scripts stop --title=egg-server-demo",
+    "start": "egg-scripts start --daemon --title=egg-server-kangaroo",
+    "stop": "egg-scripts stop --title=egg-server-kangaroo",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",

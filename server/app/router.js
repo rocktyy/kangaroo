@@ -11,6 +11,6 @@ module.exports = app => {
   router.post('/todos/delete', controller.operation.deleteTodo);
   router.post('/todos/change', controller.operation.changeState);
   router.post('/todos/add', controller.operation.addTodo);
-  router.post('/sendBack/add', controller.sendBack.addAccount);
+  router.post('/sendBack/add', controller.sendback.addAccount);
   router.post('/upload', controller.file.upload);
 };

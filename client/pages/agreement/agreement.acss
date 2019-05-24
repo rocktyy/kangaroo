@@ -1,9 +1,10 @@
 page {
-  background-color: rgb(32, 211, 207);
-  font-size: 28rpx;
+  background-color: #d0faf9;
+  color: #1b1b1b;
+  font-size: 24rpx;
 }
 
 .agreement{
-  line-height: 1.2;
+  line-height: 1.5;
   margin-bottom: 10rpx;
 }

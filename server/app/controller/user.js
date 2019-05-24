@@ -11,7 +11,7 @@ class UserController extends Controller {
     // !!!!!!该对象中的属性需要开发者根据自己小程序的ID和密钥修改!!!!!!
     // 小程序公钥和私钥存储在public-key.pem和private-key.pem文件中，请修改文件中的内容
     const alipaySdk = new AlipaySdk({
-      appId: '2019041663891017',
+      appId: '2019051364502296',
       privateKey: fs.readFileSync('./private-key.pem', 'ascii'),
       alipayPublicKey: fs.readFileSync('./public-key.pem', 'ascii'),
     });

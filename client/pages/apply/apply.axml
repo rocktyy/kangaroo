@@ -12,7 +12,7 @@
       </view>
     </view>
     <view class="form-row">
-      <view class="form-row-label">微信号1：</view>
+      <view class="form-row-label">微信号：</view>
       <view class="form-row-content">
         <input class="input" />
       </view>

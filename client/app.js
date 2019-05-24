@@ -16,7 +16,7 @@ App({
         success: res => {
           console.info('authCode>>>>>>>>>', res.authCode);
 
-          my.httpRequest({
+          my.request({
             url: theDemoDomain +'/users?authcode=' + res.authCode,
             method: 'GET',
             success: function(res) {
@@ -24,6 +24,7 @@ App({
               resolve(res.data);
             },
             fail: function(res) {
+              
               console.log('query user info fail>>>>>>>', res);
               my.alert({content: 'fail: ' + res});
             },

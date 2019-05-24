@@ -1,19 +1,20 @@
 
 .allImgBox { 
-  width: 740rpx;
+  width: 600rpx;
+  height: 600rpx;
   margin: 30rpx auto; 
 }
 .imgBox, .addImgBox { 
   display: inline-block;
-  width: 140rpx;
-  height: 140rpx;
+  width: 600rpx;
+  height: 600rpx;
   margin: 0 auto;
   position: relative;
   vertical-align: middle 
 }
 .imgBox image,.addImgBox text { 
-  width: 140rpx;
-  height: 140rpx;
+  width: 600rpx;
+  height: 600rpx;
   border: 2rpx dotted #aaa 
 }
 .imgBox .delImg { 
@@ -26,8 +27,8 @@
 
 .addImgBox text { 
   display: inline-block;
-  line-height: 140rpx;
+  line-height: 600rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 32rpx;
   color: #aaa 
 }

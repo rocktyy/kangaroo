@@ -9,15 +9,15 @@
 
   <view class="content">
     <image  class="content-avatar" src="../../assets/active.png" background-size="cover"></image>
-    <button class="content-apply" type="default"  onTap="sayHello">{{applyButton}}</button>
+    <button class="content-apply" type="default"  onTap="applyChair">{{applyButton}}</button>
     <button class="content-return" type="primary" onTap="sendBack">{{returnButton}}</button>
   </view>
 
-  <view class="introduce">
-     <image src="{{ '../../assets/introduce.png'}}" background-size="cover"></image> 
+  <view class="main">
+     <image class="introduce" src="../../assets/introduce.jpg"></image> 
   </view>
 
-  <view class="highlights">
+  <!-- <view class="highlights">
     <swiper
       indicator-dots="{{indicatorDots}}"
       autoplay="{{autoplay}}"
@@ -35,24 +35,24 @@
   <view class="footer">
     <image class="footer-icon" src="../../assets/footer.png" background-size="cover"></image> 
     <text>{{text}}</text>
-  </view>
+  </view> -->
 
-  <modal
-		show="{{modalOpened4}}"
-		onModalClose="onModalClick4"
-		advice="{{true}}"
-		>
-		<view style="display: flex; width: 270px; height: 350px;">
-			<view class="background"
-				src="https://gw.alipayobjects.com/zos/rmsportal/vJzAWQLgeDLGOMKiIgZt.png"
-			>
-      <view>
-        <label><radio value="radio1" />radio1</label>
-      </view>
-      <view>
-        <button class="apply-button" onTap="authorize">{{authorizeButton}}</button>
-      </view>
-      </view>
-		</view>
-	</modal>
 </view>
+
+<!--
+<modal
+  show="{{false}}"
+  onModalClose="onModalClick"
+  advice="{{true}}"
+  >
+  <view style="display: flex; width: 270px; height: 350px;">
+    <view class="background"
+      src="https://gw.alipayobjects.com/zos/rmsportal/vJzAWQLgeDLGOMKiIgZt.png"
+    >
+    <view>
+      <button class="apply-button" onTap="authorize">{{authorizeButton}}</button>
+    </view>
+    </view>
+  </view>
+</modal>
+-->
