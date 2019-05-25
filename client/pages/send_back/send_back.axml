@@ -29,7 +29,9 @@
         </view>
         <view class="form-row">
           <view class="form-row-content">
-            <picker onChange="bindPickerChange" name="express_type" value={{form.express_type.value}} range="{{array}}">
+            <picker onChange="bindPickerChange" name="express_type" 
+               disabled = {{disabled}} value={{form.express_type.value}}
+              range="{{array}}">
               <view class="row">
                 <view class="row-title">快递公司：</view>
                 <view class="row-extra">当前选择：{{array[form.express_type.value]}}</view>
@@ -51,13 +53,15 @@
           <view class="form-label"> {{ sendAddress.tel }} </view>
           <view class="form-label"> {{ sendAddress.address }} </view>
         </view>
-        
-        <view>
-          <button formType="submit" class="send-back-button">提交</button>
+
+      <view a:if="{{submitStatus == 'apply'}}">
+        <view class="submit">>
+          <button formType="submit" class="send-back-button">{{submitText}}</button>
         </view>
-      <view class="footer">
-        <view class="footer-title"> {{ footerTitle }} </view>
-        <view class="footer-content"> {{ footerContent }} </view>
+        <view class="footer">
+          <view class="footer-title"> {{ footerTitle }} </view>
+          <view class="footer-content"> {{ footerContent }} </view>
+        </view>
       </view>
     </view>
   </view>

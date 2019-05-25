@@ -1,6 +1,7 @@
 App({
-  userInfo: null,
-  
+  userInfo: null,  
+  activityId: 'Third_20190601',
+
   // demoDomain: 'https://xxxxxx.mapp-test.xyz',
   // 请修改为您的小程序云应用的真实域名
   demoDomain: 'http://127.0.0.1:7001',
