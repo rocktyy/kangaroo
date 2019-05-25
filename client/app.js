@@ -3,7 +3,7 @@ App({
   
   // demoDomain: 'https://xxxxxx.mapp-test.xyz',
   // 请修改为您的小程序云应用的真实域名
-  demoDomain: 'app2137169189test.mapp-test.xyz',
+  demoDomain: 'http://127.0.0.1:7001',
 
   getUserInfo() {
     var theDemoDomain = this.demoDomain;

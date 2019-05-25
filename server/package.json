@@ -4,6 +4,7 @@
   "description": "kangaroo action",
   "private": true,
   "dependencies": {
+    "@alicloud/pop-core": "^1.7.7",
     "alipay-sdk": "^3.0.4",
     "egg": "^2.14.1",
     "egg-mongoose": "^3.1.0",
@@ -25,8 +26,8 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-kangaroo",
-    "stop": "egg-scripts stop --title=egg-server-kangaroo",
+    "start": "egg-scripts start --daemon --title=egg-server-demo",
+    "stop": "egg-scripts stop --title=egg-server-demo",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",

@@ -8,28 +8,31 @@
         <view class="form-row">
           <view class="form-row-label">申请人姓名：</view>
           <view class="form-row-content">
-            <input class="input" name="name" placeholder="申请座椅回寄时填写" />
+            <input class="input" name="name" disabled = {{disabled}}
+              value ={{form.name.value}} placeholder={{form.name.placeholder}}  />
           </view>
         </view>
         <view class="form-row">
           <view class="form-row-label">联系电话：</view>
           <view class="form-row-content">
-            <input class="input" name="telephone_nm" />
+            <input class="input" name="telphone_num" 
+              disabled = {{disabled}} value={{form.telphone_num.value}}  />
           </view>
         </view>
 
         <view class="form-row">
           <view class="form-row-label">寄件人地址：</view>
           <view class="form-row-content">
-            <input class="input" name="address"/>
+            <input class="input" name="user_address"
+              disabled = {{disabled}} value={{form.user_address.value}} />
           </view>
         </view>
         <view class="form-row">
           <view class="form-row-content">
-            <picker onChange="bindPickerChange" name="express_type" value="{{index}}" range="{{array}}">
+            <picker onChange="bindPickerChange" name="express_type" value={{form.express_type.value}} range="{{array}}">
               <view class="row">
                 <view class="row-title">快递公司：</view>
-                <view class="row-extra">当前选择：{{array[index]}}</view>
+                <view class="row-extra">当前选择：{{array[form.express_type.value]}}</view>
               </view>
             </picker>
           </view>
@@ -37,15 +40,16 @@
         <view class="form-row">
           <view class="form-row-label">运单号：</view>
           <view class="form-row-content">
-            <input class="input"  name="express_number" />
+            <input class="input" name="express_num" 
+              disabled = {{disabled}} value={{form.express_num.value}} />
           </view>
         </view>
 
         <view class="send-address">
-          <view class="form-title">回寄信息填写</view>
-          <view class="form-label"> 收件人：车影工场</view>
-          <view class="form-label"> 电话： 186xxxx0001</view>
-          <view class="form-label"> 快递地址：北京市朝阳区幸福中路锦绣园公寓D座318室</view>
+          <view class="form-title"> {{ sendAddress.title }} </view>
+          <view class="form-label"> {{ sendAddress.reviveAtuor }} </view>
+          <view class="form-label"> {{ sendAddress.tel }} </view>
+          <view class="form-label"> {{ sendAddress.address }} </view>
         </view>
         
         <view>

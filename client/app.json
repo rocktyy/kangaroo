@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/send_back/send_back",
     "pages/apply/apply",
     "pages/home/home",
     "pages/agreement/agreement",
-    "pages/send_back/send_back",
     "pages/manage/manage",
     "pages/agreement/agreement",
     "pages/upload_img/upload_img",

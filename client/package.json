@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@alicloud/pop-core": "^1.7.7",
-    "mini-antui": "^0.4.2"
+    "mini-antui": "^0.4.27"
   }
 }

@@ -19,11 +19,12 @@ module.exports = appInfo => {
   // !!!!!!MySQL参数host（数据库服务IP地址）和password（admin用户的登录密码）需修改为小程序云应用服务中的MySQL的对应值!!!!!!
   config.mysql = {
     client: {
-      host: '106.14.134.49',
+      host: '47.101.222.13',
       port: '3306',
       user: 'admin',
-      password: 'y3wS7c8w', 
+      password: 'dMa4Ghgj', 
       database: 'kangaroo',
+      charset : 'utf8mb4'
     },
     app: true,
     agent: false,
