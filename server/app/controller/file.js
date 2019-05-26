@@ -9,8 +9,9 @@ const sendToWormhole = require('stream-wormhole');
 // 此处设置为应用的静态资源目录，方便外界访问
 const UPLOAD_DIR = 'app/public'; 
 
-// eg:https://app2119791483test.mapp-test.xyz
-const DEMO_DOMAIN = 'app2136429017test.mapp-test.xyz'; 
+// app2138419400test.mapp-test.xyz ; 
+const DEMO_DOMAIN = 'http://127.0.0.1:7001';
+
 
 class FileController extends Controller {
 
@@ -41,7 +42,12 @@ class FileController extends Controller {
 
     // 返回上传图片的访问地址，DEMO_DOMAIN 为云应用域名
     ctx.body = {
-      imgUrl: DEMO_DOMAIN +'/public/' + fileId,
+      success: true,
+      statusCode: 200,
+      data: {
+        imgUrl: DEMO_DOMAIN +'/public/' + fileId,
+      },
+      errMsg: 'uploadFile:ok',
     };
   }
 

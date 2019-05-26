@@ -88,8 +88,27 @@ Page({
     }); 
   },
 
+  valueCheck(detail) {
+    // 表单不合法校验
+    console.log('form的数据为：', detail)
+    const arr =Object.keys(detail), aaLength = arr.length;
+    for(let i=0; i< aaLength; i++){
+      let val = arr[i];
+      if("" === detail[val]){
+        my.showToast({
+          content: val+ "不能为空",
+        });
+        // 优化设置focus
+        return false;
+      }
+    }
+    return true;
+  },
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail)
+    if(this.valueCheck(e.detail.value)){
+      return;
+    }
 
     var alipay_user_id = '10001';
     if (app.userInfo) {

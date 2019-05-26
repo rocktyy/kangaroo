@@ -8,7 +8,7 @@ class ApplyController extends Controller {
     const { userId, activity_id } = this.ctx.request.body;
 
     const param = {
-      apply_id: userId + activity_id,
+      apply_id: userId + '_' + activity_id,
       activity_id,
       name: addParam.name,
       wechat_id: addParam.wechat_id,

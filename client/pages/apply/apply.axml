@@ -48,34 +48,34 @@
         <view class="form-row">
           <view class="form-row-label">微信号：</view>
           <view class="form-row-content">
-            <input class="input" name="wechat_id" />
+            <input class="input" name="wechat_id" maxlength="60" />
           </view>
         </view>
 
         <view class="form-row">
           <view class="form-row-label">手机号码：</view>
           <view class="form-row-content">
-            <input class="input" name="telphone_num" />
+            <input class="input" name="telphone_num" 
+              maxlength="11" onInput='bindPhoneInput' />
           </view>
         </view>
         <view class="form-row sms-block">
           <view class="form-row-label">验证码：</view>
           <view class="form-row-content">
-            <input class="input" name="sms_num" />
-            <label class="sms-tips" >发送验证码</label>
+            <input class="input" name="sms_num" maxlength="6" />
+            <button class="sms-tips" onTap="getSmsCaptcha" disabled='{{captchaDisabled}}'>{{captchaTxt}}</button>
           </view>
         </view>
         <view class="form-row">
           <view class="form-row-label">收货地址：</view>
           <view class="form-row-content">
-            <input class="input" name="address"
-              placeholder= "认真填写，很重要" />
+            <input class="input" name="address"/>
           </view>
         </view>
         <view class="form-row">
           <view class="form-row-label">身份证号：</view>
           <view class="form-row-content">
-            <input class="input" name="id_card"  />
+            <input type="idcard" name="id_card" maxlength="18" />
           </view>
         </view>
       </view>
@@ -85,26 +85,32 @@
         <view class="form-row">
           <view class="form-row-label">宝宝姓名：</view>
           <view class="form-row-content">
-            <input class="input" name="child_name" />
+            <input class="input" name="child_name" maxlength="60" />
           </view>
         </view>
         <view class="form-row">
           <view class="form-row-label">年龄：</view>
           <view class="form-row-content">
-            <input class="input" name="child_age" />
+            <input class="number" name="child_age" />
           </view>
         </view>
         <view class="form-row">
-          <view class="form-row-label-large">预计使用时长：</view>
+          <view class="form-row-label-large">预计使用时长(月)：</view>
           <view class="form-row-content">
-            <input class="input" name="use_last_day" />
+            <picker onChange="bindPickerChange" name="use_last_day" 
+              value={{useDay}} range="{{useDayArray}}">
+              <view class="row">
+                <view class="row-title"></view>
+                <view class="row-extra">{{useDayArray[useDay] + '个月'}} </view>
+              </view>
+            </picker>
           </view>
         </view>
         <view class="form-row birth-certificate">
           <view class="form-row-label-large">宝宝出生证明：</view>
           <view class="form-row-content">
-            <input class="hidden" name="birth_certificate" value=""/>
-            <view class="certificate-info" onTap="uploadImg">点击上传</view>
+            <input class="hidden" name="birth_certificate" value={{birthCertificate}} />
+            <view class="certificate-info" onTap="uploadImg">{{btnText}}</view>
           </view>
         </view>
       </view>

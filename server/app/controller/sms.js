@@ -12,13 +12,13 @@ const client = new Core({
 class SmsController extends Controller {
 
   async sendSms() {
-    const { telphoneNum } =this.ctx.body;
+    const { telphoneNum } = this.ctx.request.body;
     
     let msgSms, randomCode = parseInt((Math.random() * 9000 + 1000)),
       templateParam = `{\"code\":\"${randomCode}"\}`,
       params = {
         "RegionId": "cn-hangzhou",
-        "PhoneNumbers": telphoneNum || "18600090136",
+        "PhoneNumbers": telphoneNum,
         "SignName": "袋鼠行动验证码",
         "TemplateCode": "SMS_166375068",
         "TemplateParam": templateParam,
@@ -36,7 +36,7 @@ class SmsController extends Controller {
     this.ctx.body = {
       success: !!(msgSms.Message === 'OK'),
       msgSms: msgSms,
-      sms_number: randomCode,
+      sms_number: randomCode + "",
       data: 'sms send ok !',
     };
   }

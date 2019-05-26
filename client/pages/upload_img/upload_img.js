@@ -1,5 +1,4 @@
-// 请修改为您的小程序云应用的真实域名
-const DOMAIN_NAME = 'app2137169189test.mapp-test.xyz';
+const app = getApp();
 
 Page({
   data: {
@@ -33,41 +32,37 @@ Page({
     this.uploadImg();
   },
   uploadImg: function() {
-      var that = this;
-      var ii = that.data.i;
-      if(ii < that.data.imgUrls.length){
-        // my.uploadFile({
-        //     url: "",    //自己服务器接口地址
-        //     fileType: 'image',
-        //     fileName: 'file',
-        //     filePath: that.data.imgUrls[that.data.i],
-        //     formData: {   //这里写自己服务器接口需要的额外参数
-        //         session: my.getStorageSync({key:'session'}).data
-        //     },
-        //     success: (res) => {
-          var res = {
-            success: true,
-            statusCode: 200,
-            data:'{"data":{"image_url":"xxxxxx"},"code": 0,"msg":"\u6210\u529f"}',
-            errMsg: 'uploadFile:ok',
-          };
-          //res是自己服务器接口返回的数据（image_url的值为服务器上的图片链接），这里用假数据模拟
-          if(JSON.parse(res.data).code == 0){
-            alert('上传成功' + that.data.i);
+    var theDemoDomain = app.demoDomain;
+    var that = this;
+    var ii = that.data.i;
+    if(ii < that.data.imgUrls.length){
+      my.uploadFile({
+        url: theDemoDomain + '/upload',
+        fileType: 'image',
+        fileName: 'file',
+        filePath: that.data.imgUrls[that.data.i],
+        headers: {
+          contentDisposition: 'attachment',
+        },
+        success: (res) => {
+          console.log('upload img>>>>>>>>>', res);
+          var record = JSON.parse(res.data);
+          if(record.success){
+            app.imgUrl = record.data.imgUrl;
+            alert('图片上传成功');
           }
           that.setData({i: ii+1});
           that.uploadImg();
           // 跳转到 上传页面
           that.navigateTo();
-        //     },
-        // });
-      }else{
-        that.setData({i:0})
-      }
+        },
+      });
+    }else{
+      that.setData({i:0})
+    }
   },
   navigateTo: function (msg) {
-    var app = getApp();
-    var query = '../apply/apply?biz=apply&msg='+msg;
+    var query = '../apply/apply?from=upload_img&imgUrl='+msg;
     my.navigateBack({
       delta: 2
     })

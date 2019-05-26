@@ -1,7 +1,9 @@
 page {
   background-color: #29d7d4;
 }
-
+input {
+  font-size: 28rpx;
+}
 .content{
   width: 100%;
   background-color: #29d7d4;
@@ -51,18 +53,37 @@ page {
   position: absolute;
   right: 0;
   top: 0;
-  height: 80rpx;
-  line-height: 80rpx;
+  height: 40rpx;
+  line-height: 40rpx;
   font-size: 26rpx;
   color: rgb(216, 112, 216);
+  border:none
 }
 
 .sms-tips {
   width: 25%;
 }
 
+.row {
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+
+.row-title {
+  flex: 1;
+  color: #000;
+}
+.row-extra {
+  flex-basis: initial;
+  color: #888;
+}
+
 .certificate-info {
-  width: 25%;
+  width: 30%;
+  height: 80rpx;
+  line-height: 80rpx;
   text-decoration:underline;
 }
 

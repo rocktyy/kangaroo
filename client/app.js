@@ -1,5 +1,6 @@
 App({
   userInfo: null,  
+  imgUrl: '',
   activityId: 'Third_20190601',
 
   // demoDomain: 'https://xxxxxx.mapp-test.xyz',
