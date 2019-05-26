@@ -27,10 +27,21 @@ Page({
     //   }
     // );
   },
-
+  
   openModal() {
     this.setData({
       modalOpened: true,
+    });
+  },
+  onModalClick() {
+    this.setData({
+      modalOpened: false,
+    });
+  },
+  radioChange(e) {
+    // console.log(e.detail.value);
+    this.setData({
+      agreementCheck: true,
     });
   },
   onShareAppMessage() {
@@ -40,13 +51,6 @@ Page({
       desc: 'My App description',
       path: 'pages/index/index',
     };
-  },
-  applyChair() {
-    console.log(my.canIUse('favorite'))
-    var query = '../apply/apply?biz=home';
-    my.navigateTo({
-      url: query
-    })
   },
   sendBack() {
     var query = '../send_back/send_back?from=home';
@@ -62,9 +66,27 @@ Page({
   },
 
   onAuthorize() {
+    let that = this;
+    console.log(this.data);
+    let agreementCheck = this.data.agreementCheck;
+    if(!agreementCheck){
+      my.showToast({
+        content: "请同意袋鼠行动协议",
+      });
+      return;
+    }
     my.showToast({
       content: "签约支付宝预授权协议",
     });
+
+    that.onModalClick();
+    setTimeout(function(){
+      // 跳转 申请单页面
+      var query = '../apply/apply?biz=home';
+      my.navigateTo({
+        url: query
+      })
+    },1000)
   },
 })
 

@@ -11,8 +11,8 @@
       <view class="content-avatar">
         <image class="media" src="../../assets/media.png" ></image>
       </view>
-      <button class="content-apply"  type="default"  onTap="applyChair">{{applyButton}}</button>
-      <button class="content-return" type="primary"  onTap="openModal">{{returnButton}}</button>
+      <button class="content-apply"  type="default"  onTap="openModal">{{applyButton}}</button>
+      <button class="content-return" type="primary"  onTap="sendBack">{{returnButton}}</button>
     </view>
       
     <view class="main">
@@ -37,14 +37,18 @@
   </view>
 
   <modal
-    show="{{true}}"
+    show="{{modalOpened}}"
     onModalClose="onModalClick"
     advice="{{true}}"
     >
     <view style="display: flex; width: 280px; height: 210px; border-radius: 10px;">
       <view class="activity-content">
         <view class="agreement">
-          <radio class="agreement-radio" value={{agreementCheck}}></radio>
+          <radio-group class="agreement-radio" name="agreement-radio" onChange="radioChange">
+            <label class="agreement-check-radio">
+              <radio value={{agreementCheck}}/>
+            </label>
+          </radio-group>
           <button class="agreement-text" onTap="linkAgreement">同意袋鼠行动相关协议</button> 
         </view>
         <button class="apply-button" onTap="onAuthorize">{{authorizeButton}}</button>

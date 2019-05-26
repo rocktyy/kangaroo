@@ -102,13 +102,17 @@
 }
 
 .agreement-radio {
+  display:inline-block;
+}
+
+.agreement-check-radio {
   position: absolute;
-  left: 60rpx;
-  top:  40rpx;
+  left: 80rpx;
+  top:  34rpx;
 }
 
 .agreement-text {
-  margin-left: 20rpx;
+  margin-left: 40rpx;
   text-decoration: underline;
   display: inline-block;
   font-size: 28rpx;
