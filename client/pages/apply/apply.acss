@@ -2,6 +2,46 @@ page {
   background-color: #29d7d4;
 }
 
+.content{
+  width: 100%;
+  background-color: #29d7d4;
+}
+
+.main {
+  width: 700rpx;
+  margin: 40rpx auto;
+  line-height: 1.5;
+  color: #4a4a4a;
+  text-align: center;   
+}
+
+.recommend {
+  margin: 20rpx;
+  display: flex;
+  justify-content: space-around;
+}
+
+.explain {
+  width: 610rpx;
+  line-height: 1.2;
+  margin: 20rpx auto;
+  color: #4a4a4a;
+  font-size: 28rpx;
+  text-align: left;
+}
+.rule {
+  margin-bottom: 10rpx;
+}
+
+.hidden {
+  display: none;
+}
+
+.tips-icon {
+  width: 97rpx;
+  height: 97rpx;
+}
+
 .sms-block, .birth-certificate {
   position: relative;
   box-sizing: border-box;

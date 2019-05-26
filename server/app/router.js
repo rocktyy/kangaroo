@@ -7,14 +7,13 @@ module.exports = app => {
   const { router, controller } = app;  
   router.get('/say-hello', controller.home.index);
   router.get('/users', controller.user.getUserInfo);
-  router.get('/todos', controller.operation.getTodos);
+  router.post('/apply/init', controller.apply.initApplyInfo);
+  router.post('/apply/add', controller.apply.addApplyChair);
+  router.post('/apply/change', controller.apply.changeState);
   router.post('/sms/sendSms', controller.sms.sendSms);
-  router.post('/todos/delete', controller.operation.deleteTodo);
-  router.post('/todos/change', controller.operation.changeState);
-  router.post('/todos/add', controller.operation.addTodo);
+  router.post('/upload', controller.file.upload);
 
   router.post('/sendBack/init', controller.sendback.getSendBackInfo);
   router.post('/sendBack/add', controller.sendback.addAccount);
   
-  router.post('/upload', controller.file.upload);
 };

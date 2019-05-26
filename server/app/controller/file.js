@@ -1,12 +1,13 @@
 'use strict';
 const Controller = require('egg').Controller;
+
+const fs = require('fs');
+const uuid = require('uuid');
 const path = require('path');
 const sendToWormhole = require('stream-wormhole');
-const fs = require('fs');
 // 用于存储上传图片的目录路径，该路径对应的文件夹必须存在
 // 此处设置为应用的静态资源目录，方便外界访问
 const UPLOAD_DIR = 'app/public'; 
-const uuid = require('uuid');
 
 // eg:https://app2119791483test.mapp-test.xyz
 const DEMO_DOMAIN = 'app2136429017test.mapp-test.xyz'; 
@@ -23,7 +24,6 @@ class FileController extends Controller {
     }catch(e){
       console.log('getFileStream err',e)
     }
-    
     console.log('stream>>>>>>>',stream)
     // 生成文件名（ UPLOAD_DIR 为存储上传图片的文件夹，该文件夹必须存在）
     var fileId = uuid.v1() + path.extname(stream.filename);

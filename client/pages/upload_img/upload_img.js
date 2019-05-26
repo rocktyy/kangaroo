@@ -45,7 +45,12 @@ Page({
         //         session: my.getStorageSync({key:'session'}).data
         //     },
         //     success: (res) => {
-          var res = {data:'{"data":{"image_url":"xxxxxx"},"code":0,"msg":"\u6210\u529f"}', errMsg:"uploadFile:ok", statusCode:200};
+          var res = {
+            success: true,
+            statusCode: 200,
+            data:'{"data":{"image_url":"xxxxxx"},"code": 0,"msg":"\u6210\u529f"}',
+            errMsg: 'uploadFile:ok',
+          };
           //res是自己服务器接口返回的数据（image_url的值为服务器上的图片链接），这里用假数据模拟
           if(JSON.parse(res.data).code == 0){
             alert('上传成功' + that.data.i);

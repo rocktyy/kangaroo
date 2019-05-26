@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/send_back/send_back",
+    "pages/upload_img/upload_img",
     "pages/apply/apply",
+    "pages/send_back/send_back",
     "pages/home/home",
     "pages/agreement/agreement",
     "pages/manage/manage",
     "pages/agreement/agreement",
-    "pages/upload_img/upload_img",
     "pages/manage/manage"
   ],
   "window": {

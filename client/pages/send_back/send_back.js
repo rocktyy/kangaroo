@@ -102,7 +102,7 @@ Page({
     }
     console.log('param >>>>>>>', param);
 
-    this.addTodo(param).then(res=>{
+    this.addSendBackInfo(param).then(res=>{
       if(res.success){
         my.alert({
           title: "回寄已经成功",
@@ -117,7 +117,7 @@ Page({
   },
 
   // 写入数据库obj，当前用户增加一条todo
-  addTodo(obj) {
+  addSendBackInfo(obj) {
     var theDemoDomain = app.demoDomain;
     return new Promise(function (resolve, reject) {
       my.request({
