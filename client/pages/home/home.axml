@@ -7,52 +7,48 @@
     <image class="header-img" src="../../assets/top.png" background-size="cover"></image> 
   </view>
 
-  <view class="content">
-    <image  class="content-avatar" src="../../assets/active.png" background-size="cover"></image>
-    <button class="content-apply" type="default"  onTap="applyChair">{{applyButton}}</button>
-    <button class="content-return" type="primary" onTap="sendBack">{{returnButton}}</button>
+  <view class="content"> 
+      <view class="content-avatar">
+        <image class="media" src="../../assets/media.png" ></image>
+      </view>
+      <button class="content-apply"  type="default"  onTap="applyChair">{{applyButton}}</button>
+      <button class="content-return" type="primary"  onTap="openModal">{{returnButton}}</button>
+    </view>
+      
+    <view class="main">
+      <image class="introduce"  src="../../assets/introduce.png" background-size="cover"></image> 
+    </view>
+    
+    <view class="history-activity">
+      <image class="activity"  src="../../assets/activity.png" background-size="cover"></image> 
+    </view>
+
+    <view class="free-content">
+      <image class="free"  src="../../assets/free.png" background-size="cover" ></image> 
+    </view> 
+
+    <view class="bottom-content">
+      <image class="bottom-logo"  src="../../assets/bottom_logo.png" background-size="cover" ></image> 
+    </view>
+
+    <view class="footer">
+      <image class="footer-img"  src="../../assets/footer_bg.png" background-size="cover" />
+    </view>
   </view>
 
-  <view class="main">
-     <image class="introduce" src="../../assets/introduce.jpg"></image> 
-  </view>
-
-  <!-- <view class="highlights">
-    <swiper
-      indicator-dots="{{indicatorDots}}"
-      autoplay="{{autoplay}}"
-      interval="{{interval}}"
+  <modal
+    show="{{true}}"
+    onModalClose="onModalClick"
+    advice="{{true}}"
     >
-      <block a:for="{{background}}">
-        <swiper-item>
-          <view class="swiper-item bc_{{item}}"></view>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  
-
-  <view class="footer">
-    <image class="footer-icon" src="../../assets/footer.png" background-size="cover"></image> 
-    <text>{{text}}</text>
-  </view> -->
-
+    <view style="display: flex; width: 280px; height: 210px; border-radius: 10px;">
+      <view class="activity-content">
+        <view class="agreement">
+          <radio class="agreement-radio" value={{agreementCheck}}></radio>
+          <button class="agreement-text" onTap="linkAgreement">同意袋鼠行动相关协议</button> 
+        </view>
+        <button class="apply-button" onTap="onAuthorize">{{authorizeButton}}</button>
+      </view>
+    </view>
+  </modal>
 </view>
-
-<!--
-<modal
-  show="{{false}}"
-  onModalClose="onModalClick"
-  advice="{{true}}"
-  >
-  <view style="display: flex; width: 270px; height: 350px;">
-    <view class="background"
-      src="https://gw.alipayobjects.com/zos/rmsportal/vJzAWQLgeDLGOMKiIgZt.png"
-    >
-    <view>
-      <button class="apply-button" onTap="authorize">{{authorizeButton}}</button>
-    </view>
-    </view>
-  </view>
-</modal>
--->

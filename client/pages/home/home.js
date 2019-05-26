@@ -2,6 +2,8 @@ const app = getApp();
 
 Page({
   data: {
+    agreementCheck: false,
+    modalOpened:false,
     background: ['green', 'red', 'yellow'],
     indicatorDots: true,
     autoplay: false,
@@ -12,18 +14,24 @@ Page({
   },
 
   onLoad() {
-    app.getUserInfo().then(
-      user => {
-        this.setData({
-          user,
-        });
-        app.userInfo = user;
-      },
-      () => {
-        // 获取用户信息失败
-        console.log("获取用户信息失败");
-      }
-    );
+    // app.getUserInfo().then(
+    //   user => {
+    //     this.setData({
+    //       user,
+    //     });
+    //     app.userInfo = user;
+    //   },
+    //   () => {
+    //     // 获取用户信息失败
+    //     console.log("获取用户信息失败");
+    //   }
+    // );
+  },
+
+  openModal() {
+    this.setData({
+      modalOpened: true,
+    });
   },
   onShareAppMessage() {
     // 返回自定义分享信息
@@ -41,12 +49,21 @@ Page({
     })
   },
   sendBack() {
-    var query = '../agreement/agreement?biz=home';
+    var query = '../send_back/send_back?from=home';
     my.navigateTo({
       url: query
     })
-    my.alert({
-      content: JSON.stringify(query),
+  },
+  linkAgreement() {
+    var query = '../agreement/agreement?from=home';
+    my.navigateTo({
+      url: query
+    })
+  },
+
+  onAuthorize() {
+    my.showToast({
+      content: "签约支付宝预授权协议",
     });
   },
 })
