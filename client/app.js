@@ -3,9 +3,8 @@ App({
   imgUrl: '',
   activityId: 'Third_20190601',
 
-  // demoDomain: 'https://xxxxxx.mapp-test.xyz',
   // 请修改为您的小程序云应用的真实域名
-  demoDomain: 'http://127.0.0.1:7001',
+  demoDomain: 'app2138419400test.mapp-test.xyz',
 
   getUserInfo() {
     var theDemoDomain = this.demoDomain;
@@ -17,7 +16,6 @@ App({
         scopes: 'auth_user',
         success: res => {
           console.info('authCode>>>>>>>>>', res.authCode);
-
           my.request({
             url: theDemoDomain +'/users?authcode=' + res.authCode,
             method: 'GET',
@@ -26,7 +24,6 @@ App({
               resolve(res.data);
             },
             fail: function(res) {
-              
               console.log('query user info fail>>>>>>>', res);
               my.alert({content: 'fail: ' + res});
             },
