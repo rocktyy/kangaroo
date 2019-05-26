@@ -88,5 +88,11 @@ Page({
       })
     },1000)
   },
+  imgClick(event){
+    // 图片点击，视频播放
+    my.navigateTo({
+      url: '../webview/webview'
+    })
+  },
 })
 

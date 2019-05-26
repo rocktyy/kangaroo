@@ -1,0 +1,4 @@
+<view class="page">
+  <web-view src="file:///Users/xiangjiali/queen/%E5%B0%8F%E7%A8%8B%E5%BA%8F/doc/%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF/%E8%A7%86%E9%A2%91%E7%BD%91%E9%A1%B5/video.html" onMessage="onmessage"></web-view>
+</view> 
+<!--  https://v.youku.com/v_show/id_XNDE5NDMyOTIwNA==.html?spm=a2h3j.8428770.3416059.1 -->

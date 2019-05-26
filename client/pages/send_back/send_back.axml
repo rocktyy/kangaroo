@@ -55,7 +55,7 @@
         </view>
 
       <view a:if="{{submitStatus == 'apply'}}">
-        <view class="submit">>
+        <view class="submit">
           <button formType="submit" class="send-back-button">{{submitText}}</button>
         </view>
         <view class="footer">

@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "favorite-btn": "/components/favorite_btn/favorite_btn",
-    "header": "/components/header/header"
-  }
-}

@@ -2,7 +2,7 @@ page {
   background-color: #29d7d4;
 }
 input {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 .content{
   width: 100%;
