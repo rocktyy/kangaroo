@@ -6,6 +6,17 @@ class ApplyController extends Controller {
   async addApplyChair() {
     const addParam = this.ctx.request.body;
     const { userId, activity_id } = this.ctx.request.body;
+    // 查询数据
+    const searchInfo = await this.searchApplyInfo(activity_id, userId) || [];
+    console.log("===========searchInfo===========",searchInfo);
+    if(searchInfo.length > 0){
+      // 存在数据返回
+      this.ctx.body = {
+        success: false,
+        data: '数据已经存在，请返回再试'
+      }
+      return;
+    }
 
     const param = {
       apply_id: userId + '_' + activity_id,
@@ -28,6 +39,7 @@ class ApplyController extends Controller {
       alipay_user_id: userId
     }
     // 向数据库插入数据
+    console.log("===========insertInfo===========", newTask);
     const dataInfo = await this.app.mysql.insert('apply_info', newTask);
     const result = dataInfo && dataInfo[0] || {};
     if(Object.keys(result).length === 0){
@@ -45,6 +57,39 @@ class ApplyController extends Controller {
     }
   }
 
+  async searchApplyInfo(activity_id, userId) {
+
+    var dataInfo = await this.app.mysql.select('apply_info', {
+      where: { 
+        alipay_user_id: userId,
+        activity_id,
+      }
+    });
+    return dataInfo
+  }
+ 
+  async initApplyInfo() {
+    // 从url的query中取得userId
+    var { activity_id, userId } = this.ctx.request.body;
+    const dataInfo = await this.searchApplyInfo(activity_id, userId);
+
+    const result = dataInfo && dataInfo[0] || {};
+
+    if(Object.keys(result).length === 0){
+      this.ctx.body = {
+        success: false,
+        data: '服务正忙，请稍后再试'  
+      }
+      return;
+    }
+
+    // 将todo项写入消息体，返回给前端
+    this.ctx.body = {
+      success: true,
+      data: result.apply_status,
+    };
+  }
+
   async changeState() {
     // 从请求消息体中取得userId
     const { id } = this.ctx.request.body;
@@ -59,34 +104,6 @@ class ApplyController extends Controller {
     this.ctx.body = {
       success: result.affectedRows === 1
     }
-  }
-  
-  async initApplyInfo() {
-    // 从url的query中取得userId
-    var { activity_id, userId } = this.ctx.request.body;
-    console.log(activity_id, userId);
-    var dataInfo = await this.app.mysql.select('apply_info', {
-      where: { 
-        alipay_user_id: userId,
-        activity_id,
-      }
-    });
-    const result = dataInfo && dataInfo[0] || {};
-    console.log(result);
-
-    if(Object.keys(result).length === 0){
-      this.ctx.body = {
-        success: false,
-        data: '服务正忙，稍后再试'  
-      }
-      return;
-    }
-
-    // 将todo项写入消息体，返回给前端
-    this.ctx.body = {
-      success: true,
-      data: result.apply_status,
-    };
   }
 }
 

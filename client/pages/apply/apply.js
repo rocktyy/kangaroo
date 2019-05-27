@@ -50,13 +50,10 @@ Page({
 
     this.getApplyInfo(param).then(res=>{
       if(res.success){
+        // 有数据，非第一申领 
         that.setData({
           applyStatus: res.data,
         });
-      }else{
-        my.showToast({
-          content:'请求失败，请重试'
-        })
       }
     }); 
   },
