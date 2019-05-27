@@ -6,17 +6,6 @@ class ApplyController extends Controller {
   async addApplyChair() {
     const addParam = this.ctx.request.body;
     const { userId, activity_id } = this.ctx.request.body;
-    // 查询数据
-    const searchInfo = await this.searchApplyInfo(activity_id, userId) || [];
-    console.log("===========searchInfo===========",searchInfo);
-    if(searchInfo.length > 0){
-      // 存在数据返回
-      this.ctx.body = {
-        success: false,
-        data: '数据已经存在，请返回再试'
-      }
-      return;
-    }
 
     const param = {
       apply_id: userId + '_' + activity_id,
@@ -40,8 +29,18 @@ class ApplyController extends Controller {
     }
     // 向数据库插入数据
     console.log("===========insertInfo===========", newTask);
-    const dataInfo = await this.app.mysql.insert('apply_info', newTask);
+    const dataInfo = {};
+    try{ 
+      dataInfo = await this.app.mysql.insert('apply_info', newTask);
+    } catch(e){
+      this.ctx.body = {
+        success: false,
+        data: '服务正忙，稍后再试'  
+      }
+      return;
+    }
     const result = dataInfo && dataInfo[0] || {};
+
     if(Object.keys(result).length === 0){
       this.ctx.body = {
         success: false,
