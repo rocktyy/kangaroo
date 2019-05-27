@@ -27,7 +27,6 @@ Page({
       }
     );
   },
-  
   openModal() {
     this.setData({
       modalOpened: true,
@@ -39,7 +38,6 @@ Page({
     });
   },
   radioChange(e) {
-    // console.log(e.detail.value);
     this.setData({
       agreementCheck: true,
     });
@@ -67,7 +65,6 @@ Page({
 
   onAuthorize() {
     let that = this;
-    console.log(this.data);
     let agreementCheck = this.data.agreementCheck;
     if(!agreementCheck){
       my.showToast({
@@ -129,6 +126,13 @@ Page({
         })
       }
     });
-  }
+  },
+
+  secondImgClick(event){
+    // 图片点击，视频播放
+    my.navigateTo({
+      url: '../webview/webview'
+    })
+  },
 })
 

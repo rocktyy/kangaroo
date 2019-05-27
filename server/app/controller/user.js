@@ -26,16 +26,12 @@ class UserController extends Controller {
     };
     try {
       const authResult = await alipaySdk.exec(authMethod, authParams);
-      console.log('user access info>>>>>>>', authResult);
-
       // 调用alipay.user.info.share方法，用access token 拿到用户信息
       const userMethod = 'alipay.user.info.share';
       const userParams = {
         auth_token: authResult.accessToken,
       }
       const result = await alipaySdk.exec(userMethod, userParams);
-      console.log('user info>>>>>>>', result);
-
       // 将用户信息写入返回的消息体中，返回给前端
       this.ctx.body = result;
     } catch (err) {

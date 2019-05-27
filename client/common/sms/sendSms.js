@@ -33,7 +33,6 @@ client.send = function (mobile){
 client.sendCode = function (number_) {
   my.setStorageSync({key:'sms_mobile', data:number_});
   client.send(number_).then(res=>{
-    console.log(res);
     if(res.success){
       my.setStorageSync({key:'sms_core', data: res.sms_number});
     }else{

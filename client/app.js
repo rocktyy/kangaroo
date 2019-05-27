@@ -4,18 +4,15 @@ App({
   activityId: 'Third_20190601',
 
   // 请修改为您的小程序云应用的真实域名
-  demoDomain: 'https://kangaroo.kangarooaaction.com',
+  demoDomain: 'https://app2138419400test.mapp-test.xyz',
 
   getUserInfo() {
     var theDemoDomain = this.demoDomain;
     return new Promise((resolve, reject) => {
       if (this.userInfo) resolve(this.userInfo);
-
-      console.log("get user info...");
       my.getAuthCode({
         scopes: 'auth_user',
         success: res => {
-          console.info('authCode>>>>>>>>>', res.authCode);
           my.request({
             url: theDemoDomain +'/users?authcode=' + res.authCode,
             method: 'GET',
@@ -33,7 +30,6 @@ App({
           });
         },
         fail: () => {
-          console.log('get authcode fail');
           reject({});
         },
       });

@@ -1,5 +1,13 @@
 const app = getApp();
 
+const sendInfo = {
+  name: '寄件人姓名',
+  telphone_num: '手机号码',
+  user_address: '寄件人地址',
+  express_type: '快递公司',
+  express_num: '运单号'
+}
+
 Page({
   data: {
     index: 0,
@@ -54,7 +62,6 @@ Page({
        userId,
        activity_id
      };
-    console.log(param);
 
     this.getInfo(param).then(res=>{
       if(res.success){
@@ -81,32 +88,39 @@ Page({
           }
         });
       }else{
-        my.showToast({
-          content:'请求失败，请重试'
-        })
+        // 新建回寄订单
+        console.log('请求失败，请重试');
       }
     }); 
   },
 
   valueCheck(detail) {
     // 表单不合法校验
-    console.log('form的数据为：', detail)
-    const arr =Object.keys(detail), aaLength = arr.length;
+    let arr =Object.keys(detail), aaLength = arr.length;
     for(let i=0; i< aaLength; i++){
       let val = arr[i];
       if("" === detail[val]){
         my.showToast({
-          content: val+ "不能为空",
+          content: sendInfo[val]+ "-不能为空",
         });
         // 优化设置focus
         return false;
+      } else if (val === 'telphone_num' && !(/^1(3|4|5|7|8)\d{9}$/.test(detail[val]))){
+          my.showToast({
+            type: 'none',
+            content: '请输入正确的手机号码',
+            duration: 2000,
+          });
+          return false;
+      } else {
+        continue;
       }
     }
     return true;
   },
   formSubmit(e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail)
-    if(this.valueCheck(e.detail.value)){
+    var that =this;
+    if(!this.valueCheck(e.detail.value)){
       return;
     }
 
@@ -119,13 +133,15 @@ Page({
       express_type: this.data.index,
       alipay_user_id,
     }
-    console.log('param >>>>>>>', param);
-
     this.addSendBackInfo(param).then(res=>{
       if(res.success){
         my.alert({
           title: "回寄已经成功",
           content: res.data
+        });
+        that.setData({
+          disabled: true,
+          submitStatus: 'completed',
         });
       }else{
         my.showToast({
@@ -151,7 +167,6 @@ Page({
           resolve(res.data);
         },
         fail: function(res) {
-          console.log('Add todo fail>>>>>>>>', res)
           reject();
         }
       });

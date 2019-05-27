@@ -27,16 +27,15 @@ class ApplyController extends Controller {
       ...param,
       alipay_user_id: userId
     }
-    console.log("insert param >>>", newTask);
     // 向数据库插入数据
     const dataInfo = await this.app.mysql.insert('apply_info', newTask);
-
     const result = dataInfo && dataInfo[0] || {};
     if(Object.keys(result).length === 0){
       this.ctx.body = {
         success: false,
         data: '服务正忙，稍后再试'  
       }
+      return;
     }
 
     // 返回给前端数据库query执行结果
@@ -80,6 +79,7 @@ class ApplyController extends Controller {
         success: false,
         data: '服务正忙，稍后再试'  
       }
+      return;
     }
 
     // 将todo项写入消息体，返回给前端

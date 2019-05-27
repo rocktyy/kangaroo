@@ -1,7 +1,7 @@
 
 .page-home {
   width: 100%;
-  height: 3342rpx;
+  height: 3600rpx;
   background-image: url(../../assets/bg.png);
 }
 
@@ -54,7 +54,7 @@
  
 .introduce {
   width: 686rpx;
-  height: 490rpx;
+  height: 742rpx;
   margin-top: -60rpx;
 }
 

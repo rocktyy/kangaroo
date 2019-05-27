@@ -31,10 +31,7 @@ Page({
   },
   onShow() {
     // 页面加载
-    console.log("imgUrl:", app.imgUrl);
-    console.log("birthCertificate:", this.data);
     if(app.imgUrl && !this.data.birthCertificate){
-      console.log("---初始化图片地址---");
       this.setData({
         birthCertificate: app.imgUrl,
         btnText: '已上传，修改...',
@@ -95,7 +92,6 @@ Page({
 
   valueCheck(detail) {
     // 表单不合法校验
-    console.log('form的数据为：', detail)
     let arr =Object.keys(detail), aaLength = arr.length;
     for(let i=0; i< aaLength; i++){
       let val = arr[i];
@@ -150,7 +146,6 @@ Page({
        activity_id,
        userId,
      };
-    console.log('param >>>>>>>', param);
 
     this.applyChair(param).then(res=>{
       if(res.success){

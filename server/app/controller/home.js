@@ -31,6 +31,7 @@ class HomeController extends Controller {
         count: count,
         data: 'system error:'
       };
+      return;
     }
 
     this.ctx.body = {

@@ -16,7 +16,7 @@
           <view class="form-row-label">联系电话：</view>
           <view class="form-row-content">
             <input class="input" name="telphone_num" 
-              disabled = {{disabled}} value={{form.telphone_num.value}}  />
+             maxlength="11" disabled = {{disabled}} value={{form.telphone_num.value}}  />
           </view>
         </view>
 

@@ -24,15 +24,13 @@ class SmsController extends Controller {
         "TemplateParam": templateParam,
       },
       requestOption = { method: 'POST' };
-    console.log(params);
 
     const record =  await client.request('SendSms', params, requestOption).then((result) => {
       msgSms = result;
     }, (ex) => {
       msgSms = ex;
     })
-    console.log('msgSms', msgSms);
-
+    
     this.ctx.body = {
       success: !!(msgSms.Message === 'OK'),
       msgSms: msgSms,

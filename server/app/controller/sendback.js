@@ -6,21 +6,20 @@ class SendbackController extends Controller {
   async getSendBackInfo() {
     // 从url的query中取得userId
     var { activity_id, userId } = this.ctx.request.body;
-    console.log(activity_id, userId);
     var dataInfo = await this.app.mysql.select('send_back_info', {
       where: { 
         alipay_user_id: userId,
         activity_id,
       }
-    });
+    }) || [];
     const result = dataInfo && dataInfo[0] || {};
-    console.log(result);
-
-    if(Object.keys(result).length === 0){
+    
+    if(dataInfo.length === 0){
       this.ctx.body = {
         success: false,
         data: '服务正忙，稍后再试'  
       }
+      return;
     }
 
     // 将todo项写入消息体，返回给前端
@@ -50,6 +49,7 @@ class SendbackController extends Controller {
         success: false,
         data: '寄回失败，稍后再试'  
       }
+      return;
     }
 
     // 返回给前端数据库query执行结果

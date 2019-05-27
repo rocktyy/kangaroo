@@ -49,7 +49,10 @@ Page({
           var record = JSON.parse(res.data);
           if(record.success){
             app.imgUrl = record.data.imgUrl;
-            alert('图片上传成功');
+            my.showToast({
+              content: '图片上传成功',
+              duration: 1000,
+            });
           }
           that.setData({i: ii+1});
           that.uploadImg();
@@ -62,9 +65,9 @@ Page({
     }
   },
   navigateTo: function (msg) {
-    var query = '../apply/apply?from=upload_img&imgUrl='+msg;
+    // var query = '../apply/apply?from=upload_img&imgUrl='+msg;
     my.navigateBack({
-      delta: 2
+      delta: 1
     })
   },
   // 删除照片

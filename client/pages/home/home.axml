@@ -8,7 +8,7 @@
       <view class="content-avatar">
         <image class="media" src="../../assets/media.png" onTap="imgClick" ></image>
       </view>
-      <button class="content-apply"  type="default"  onTap="sayHello">{{applyButton}}</button>
+      <button class="content-apply"  type="default"  onTap="openModal">{{applyButton}}</button>
       <button class="content-return" type="primary"  onTap="sendBack">{{returnButton}}</button>
     </view>
       
@@ -21,7 +21,7 @@
     </view>
 
     <view class="free-content">
-      <image class="free"  src="../../assets/free.png" background-size="cover" ></image> 
+      <image class="free" onTap="secondImgClick" src="../../assets/free.png" background-size="cover" ></image> 
     </view> 
 
     <view class="bottom-content">
