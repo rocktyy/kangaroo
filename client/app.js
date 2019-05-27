@@ -4,7 +4,7 @@ App({
   activityId: 'Third_20190601',
 
   // 请修改为您的小程序云应用的真实域名
-  demoDomain: 'app2138419400test.mapp-test.xyz',
+  demoDomain: 'https://app2138419400test.mapp-test.xyz',
 
   getUserInfo() {
     var theDemoDomain = this.demoDomain;
