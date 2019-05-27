@@ -39,12 +39,10 @@ class HomeController extends Controller {
       data: 'Hello! stock info:' + result.stock,
     };
   }
-
   
   async hello() {
     this.ctx.body = {
       success: true,
-      count: count,
       data: 'hello~ small app!',
     };
   }

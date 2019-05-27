@@ -8,10 +8,7 @@ const sendToWormhole = require('stream-wormhole');
 // 用于存储上传图片的目录路径，该路径对应的文件夹必须存在
 // 此处设置为应用的静态资源目录，方便外界访问
 const UPLOAD_DIR = 'app/public'; 
-
-// app2138419400test.mapp-test.xyz ; 
-const DEMO_DOMAIN = 'http://127.0.0.1:7001';
-
+const DEMO_DOMAIN = 'https://kangaroo.kangarooaaction.com',
 
 class FileController extends Controller {
 
