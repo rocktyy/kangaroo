@@ -5,7 +5,9 @@
  */
 module.exports = app => {
   const { router, controller } = app;  
-  router.get('/say-hello', controller.home.index);
+  router.get('/hello', controller.home.hello);
+  router.get('/home', controller.home.index);
+  
   router.get('/users', controller.user.getUserInfo);
   router.post('/apply/init', controller.apply.initApplyInfo);
   router.post('/apply/add', controller.apply.addApplyChair);

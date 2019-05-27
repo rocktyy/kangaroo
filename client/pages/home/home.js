@@ -109,6 +109,26 @@ Page({
       });
       }
     });
+  },
+
+
+  sayHello() {
+    var theDemoDomain = app.demoDomain;
+    my.request({
+      url: theDemoDomain+'/hello', 
+      success: (res) => {
+        my.alert({
+          title: "来自云服务的问候",
+          content: res.data.data
+        });
+      },
+      fail: (err) => {
+        my.alert({
+          title: "错误信息",
+          content: JSON.stringify(err)
+        })
+      }
+    });
   }
 })
 

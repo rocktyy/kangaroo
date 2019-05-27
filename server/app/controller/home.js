@@ -40,6 +40,15 @@ class HomeController extends Controller {
     };
   }
 
+  
+  async hello() {
+    this.ctx.body = {
+      success: true,
+      count: count,
+      data: 'Hello! small app:',
+    };
+  }
+
 }
 
 module.exports = HomeController;

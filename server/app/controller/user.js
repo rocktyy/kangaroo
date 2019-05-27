@@ -1,5 +1,7 @@
 'use strict';
 const Controller = require('egg').Controller;
+const fs = require('fs');
+const AlipaySdk = require('alipay-sdk').default;
 
 class UserController extends Controller {
 
