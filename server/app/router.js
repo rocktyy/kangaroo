@@ -5,7 +5,7 @@
  */
 module.exports = app => {
   const { router, controller } = app;  
-  router.get('/hello', controller.home.);
+  router.get('/hello', controller.home.hello);
   router.get('/home', controller.home.index);
   
   router.get('/users', controller.user.getUserInfo);
