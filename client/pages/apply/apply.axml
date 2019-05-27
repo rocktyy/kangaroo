@@ -21,9 +21,10 @@
         <view>对不起没有申请到, 可以关注生活号，等待下期活动</view>
       </view>
     </view>
-    <view class="recommend">
+    <!-- <view class="recommend">
       <favorite-btn />
-    </view>
+    </view> -->
+    <favorite type="tips" bottom="10rpx" >收藏小程序，下次使用更方便</favorite>
   </view>
   <view class="explain"  a:if="{{applyStatus === 1}}">
     <view class="rule" >温馨提示：</view>
