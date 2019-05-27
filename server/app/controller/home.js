@@ -45,7 +45,7 @@ class HomeController extends Controller {
     this.ctx.body = {
       success: true,
       count: count,
-      data: 'Hello! small app:',
+      data: 'hello~ small app!',
     };
   }
 

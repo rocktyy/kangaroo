@@ -1,6 +1,5 @@
-// 倒计时插件
 /*
-开发者: 榛子云短信(http://smsow.zhenzikj.com)
+倒计时插件
 */
 class CountDown {
   //captchaClickable是否允许点击
