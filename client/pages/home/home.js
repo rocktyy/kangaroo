@@ -8,12 +8,16 @@ Page({
     indicatorDots: true,
     autoplay: false,
     interval: 3000,
+    count: 0,
+    maxCount: 50,
+    urlRange: '',
     applyButton:'申请安全座椅',
     returnButton:'退还安全座椅',
     authorizeButton:'点击授权使用芝麻信用分',
   },
 
   onLoad() {
+    // 初始化userId
     app.getUserInfo().then(
       user => {
         this.setData({
@@ -26,8 +30,63 @@ Page({
         console.log("获取用户信息失败");
       }
     );
+
+    var that =this,
+      activityId = app.activityId;
+      // 初始化首页的 数据
+      this.getHomeInint(activityId).then(res=>{
+        if(res.success){
+          console.log(res);
+          that.setData({
+            count: res.count, 
+            maxCount: res.maxCount,
+            urlRange: res.urlRange,
+          });
+          app.startDate = res.startDate;
+          
+        }else{
+          // 新建回寄订单
+          console.log('请求失败，请重试');
+        }
+      }); 
   },
+
+  compareDate(){
+    let startDate = app.startDate;
+    var d1Timestamp = Date.parse(new Date());
+    var d2Timestamp = Date.parse(new Date(startDate));
+    return !!(d1Timestamp>d2Timestamp);
+  },
+
+  activityCheck(count){
+    if(!this.compareDate()){
+      my.alert({
+        title: '活动提示',
+        content: '活动将于2019.6.1日8点开始申请',
+        buttonText: '我知道了',
+        success: () => {
+        },
+      });
+      return false;
+    }
+
+    if(this.data.count > this.data.maxCount){
+      my.alert({
+        title: '活动提示',
+        content: '今日安全座椅已经全部申领完毕，请于明早8点后再试一试哦',
+        buttonText: '我知道了',
+        success: () => {
+        },
+      });
+      return false;
+    }
+    return true;
+  },
+
   openModal() {
+    if( !this.activityCheck() ){
+      return;
+    }
     this.setData({
       modalOpened: true,
     });
@@ -88,7 +147,7 @@ Page({
   imgClick(event){
     // 图片点击，视频播放
     my.navigateTo({
-      url: '../webview/webview'
+      url: '../webview/webview?videoUrl='+this.data.urlRange+'/video1.html'
     })
   },
 
@@ -108,6 +167,22 @@ Page({
     });
   },
 
+
+  getHomeInint(activityId) {
+    var theDemoDomain = app.demoDomain;
+    return new Promise(function (resolve, reject) {
+      my.request({
+        url: theDemoDomain+'/home?activityId='+activityId,
+        success: (res) => {
+          console.log(res)
+          resolve(res.data);
+        },
+        fail: function(res) {
+          reject(res);
+        }
+      });
+    });
+  },
 
   sayHello() {
     var theDemoDomain = app.demoDomain;
@@ -131,7 +206,7 @@ Page({
   secondImgClick(event){
     // 图片点击，视频播放
     my.navigateTo({
-      url: '../webview/webview'
+      url: '../webview/webview?videoUrl='+this.data.urlRange+'/video2.html'
     })
   },
 })
