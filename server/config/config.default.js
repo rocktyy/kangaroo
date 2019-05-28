@@ -36,7 +36,7 @@ module.exports = appInfo => {
 
   // !!!!!!MySQL参数host（数据库服务IP地址）和password（admin用户的登录密码）需修改为小程序云应用服务中的MySQL的对应值!!!!!!
   config.mysql = {
-    client: clientArray[0],
+    client: clientArray[1],
     app: true,
     agent: false,
   };

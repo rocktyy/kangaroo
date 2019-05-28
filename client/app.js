@@ -12,6 +12,7 @@ App({
 
   getUserInfo() {
     const demoDomain =  {
+      'sit': 'https://app2138419400test.mapp-test.xyz',
       'online':'https://kangaroo.kangarooaaction.com',
     }
     this.demoDomain = demoDomain['online'];

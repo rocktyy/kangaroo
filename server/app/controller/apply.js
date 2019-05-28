@@ -4,6 +4,7 @@ const Controller = require('egg').Controller;
 class ApplyController extends Controller {
 
   async addApplyChair() {
+    console.log("===========addApplyChair===========");
     const addParam = this.ctx.request.body;
     const { userId, activity_id } = this.ctx.request.body;
 
@@ -28,31 +29,28 @@ class ApplyController extends Controller {
       alipay_user_id: userId
     }
     // 向数据库插入数据
-    console.log("===========insertInfo===========", newTask);
-    const dataInfo = {};
+    console.log("===========insertInfo===========", newTask); 
+ 
     try{ 
-      dataInfo = await this.app.mysql.insert('apply_info', newTask);
+      const dataInfo = await this.app.mysql.insert('apply_info', newTask);
+      const result = dataInfo && dataInfo[0] || {};
+
+      if(dataInfo.length === 0){
+        this.ctx.body = {
+          success: false,
+          data: '服务正忙，稍后再试'  
+        }
+        return;
+      }
+      // 返回给前端数据库query执行结果
+      this.ctx.body = {
+        success: true,
+        result: result,
+        msg: '添加成功',
+      }
     } catch(e){
-      this.ctx.body = {
-        success: false,
-        data: '服务正忙，稍后再试'  
-      }
+      console.log('INSERT info err>>>>>', e);
       return;
-    }
-    const result = dataInfo && dataInfo[0] || {};
-
-    if(Object.keys(result).length === 0){
-      this.ctx.body = {
-        success: false,
-        data: '服务正忙，稍后再试'  
-      }
-      return;
-    }
-
-    // 返回给前端数据库query执行结果
-    this.ctx.body = {
-      success: true,
-      data: '添加成功',
     }
   }
 

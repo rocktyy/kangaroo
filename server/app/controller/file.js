@@ -14,7 +14,7 @@ const SERVER_DOMAIN =  {
   'sit': 'https://app2138419400test.mapp-test.xyz',
   'online':'https://kangaroo.kangarooaaction.com',
 }
-const DEMO_DOMAIN = SERVER_DOMAIN['sit'];
+const DEMO_DOMAIN = SERVER_DOMAIN['online'];
 
 class FileController extends Controller {
 
