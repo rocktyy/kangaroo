@@ -11,6 +11,7 @@ Page({
     count: 0,
     maxCount: 50,
     urlRange: '',
+    applyStatus: 0, //0未申请 1为申请
     applyButton:'申请安全座椅',
     returnButton:'退还安全座椅',
     authorizeButton:'点击授权使用芝麻信用分',
@@ -24,37 +25,50 @@ Page({
           user,
         });
         app.userInfo = user;
+        // 首页初始化
+        this.pageInit(user.userId);
       },
       () => {
-        // 获取用户信息失败
-        console.log("获取用户信息失败");
+        // 新建回寄订单
+        my.showToast({
+          content: "获取用户信息失败，请重试",
+        });
       }
     );
+  },
 
+  pageInit(user){
     var that =this,
-      activityId = app.activityId;
-      // 初始化首页的 数据
-      this.getHomeInint(activityId).then(res=>{
-        if(res.success){
-          console.log(res);
-          that.setData({
-            count: res.count, 
-            maxCount: res.maxCount,
-            urlRange: res.urlRange,
-          });
-          app.startDate = res.startDate;
-          
-        }else{
-          // 新建回寄订单
-          console.log('请求失败，请重试');
-        }
-      }); 
+      activityId = app.activityId,
+      param = {
+        userId: user,
+        activityId
+      };
+    // 初始化首页的 数据
+    this.getHomeInint(param).then(res=>{
+      if(res.success){
+        console.log(res);
+        that.setData({
+          count: res.count, 
+          maxCount: res.maxCount,
+          urlRange: res.urlRange,
+          applyStatus : res.applyInfo && res.applyInfo.applyStatus || 0,
+        });
+        app.startDate = res.startDate;
+        
+      }else{
+        // 新建回寄订单
+        my.showToast({
+          content: "系统繁忙，请重试",
+        });
+      }
+    }); 
   },
 
   compareDate(){
     let startDate = app.startDate;
-    var d1Timestamp = Date.parse(new Date());
-    var d2Timestamp = Date.parse(new Date(startDate));
+    let d1Timestamp = Date.parse(new Date());
+    let d2Timestamp = Date.parse(new Date(Date.parse(startDate)));
     return !!(d1Timestamp>d2Timestamp);
   },
 
@@ -62,20 +76,20 @@ Page({
     if(!this.compareDate()){
       my.alert({
         title: '活动提示',
-        content: '活动将于2019.6.1日8点开始申请',
+        content: '袋鼠行动将于2019年6月1日8点开始哦！ (6月1日-6月4日每日限量申请50台座椅，先到先得）',
         buttonText: '我知道了',
         success: () => {
         },
       });
       return false;
     }
-
     if(this.data.count > this.data.maxCount){
       my.alert({
         title: '活动提示',
-        content: '今日安全座椅已经全部申领完毕，请于明早8点后再试一试哦',
+        content: '今日安全座椅已全部申领完毕，明日早八点将再次开放申请。',
         buttonText: '我知道了',
         success: () => {
+          // 数据埋点
         },
       });
       return false;
@@ -84,18 +98,74 @@ Page({
   },
 
   openModal() {
-    if( !this.activityCheck() ){
+    if(!this.activityCheck()){
       return;
     }
     this.setData({
       modalOpened: true,
     });
+
+    //this.appFreeze();
   },
+
   onModalClick() {
     this.setData({
       modalOpened: false,
     });
   },
+
+  appFreeze(){
+    let param = {
+      userId : app.userInfo || '2088302207659350',
+    }
+    //调用 获取订单ID
+    this.getFreeOrder(param).then(res=>{
+      if(res.success){
+        // 生成支付宝统一订单
+        that.setData({
+          orderNo: res.data.orderNo,
+        });
+      }
+    }); 
+  },
+
+  getFreeOrder(param) {
+    var theDemoDomain = app.demoDomain;
+    return new Promise(function (resolve, reject) {
+       my.request({
+        url: theDemoDomain+'/order/getTradeNo', 
+        method: 'POST',
+        data: param,
+        dataType: 'json',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        success: (res) => {
+          resolve(res.data);
+        },
+        fail: function(res) {
+          reject();
+        }
+      });
+    });
+  },
+
+  tradePay(){
+    my.tradePay({
+      tradeNO: '201711152100110410533667792', 
+      success: (res) => {
+        my.alert({
+        content: JSON.stringify(res),
+      });
+      },
+      fail: (res) => {
+        my.alert({
+        content: JSON.stringify(res),
+      });
+      }
+    });
+  },
+
   radioChange(e) {
     this.setData({
       agreementCheck: true,
@@ -167,12 +237,11 @@ Page({
     });
   },
 
-
-  getHomeInint(activityId) {
+  getHomeInint(param) {
     var theDemoDomain = app.demoDomain;
     return new Promise(function (resolve, reject) {
       my.request({
-        url: theDemoDomain+'/home?activityId='+activityId,
+        url: theDemoDomain+'/home?activityId='+param.activityId+'&userId='+param.userId,
         success: (res) => {
           console.log(res)
           resolve(res.data);
