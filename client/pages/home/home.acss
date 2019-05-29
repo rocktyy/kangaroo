@@ -1,12 +1,13 @@
 
 .page-home {
   width: 100%;
-  height: 3600rpx;
+  height: 3750rpx;
   background-image: url(../../assets/bg.png);
 }
 
 .header-img{
   width: 100%;
+  height: 628rpx;
 }
 
 .content{
@@ -53,8 +54,8 @@
 }
  
 .introduce {
-  width: 686rpx;
-  height: 742rpx;
+  width: 700rpx;
+  height: 770rpx;
   margin-top: -60rpx;
 }
 
@@ -66,26 +67,26 @@
 }
  
 .activity {
-  width: 674rpx;
-  height: 1110rpx;
-  margin-top: -210rpx;
+  width: 696rpx;
+  height: 950rpx;
+  margin-top: -40rpx;
 }
 
 .free {
   width: 750rpx;
-  height: 394rpx;
+  height: 434rpx;
   margin: 30rpx auto;
 }
 
 .bottom-logo {
   width: 290rpx;
   height: 200rpx;
-  margin: 0 auto;
+  margin: 40rpx auto;
 }
 
 .footer-img {
-  width: 100%;
-  height: 243rpx;
+  width: 750rpx;
+  height: 236rpx;
 }
 
 .activity-content {

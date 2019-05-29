@@ -9,8 +9,9 @@
         <image class="media" src="../../assets/media.png" onTap="imgClick" ></image>
       </view>
       <button class="content-apply"  type="default"  onTap="openModal">{{applyButton}}</button>
-      <button class="content-return" type="primary"  onTap="sendBack">{{returnButton}}</button>
-    </view>
+      <view a:if="{{applyStatus === 3}}">
+        <button class="content-return" type="primary"  onTap="sendBack">{{returnButton}}</button>
+      </view>
       
     <view class="main">
       <image class="introduce"  src="../../assets/introduce.png" background-size="cover"></image> 

@@ -21,15 +21,12 @@ App({
             url: theDemoDomain +'/users?authcode=' + res.authCode,
             method: 'GET',
             success: function(res) {
-              console.log('user info>>>>>>>>>>>', res);
               resolve(res.data);
             },
             fail: function(res) {
-              console.log('query user info fail>>>>>>>', res);
               my.alert({content: 'fail: ' + res});
             },
             complete: function(res) {
-              console.log('query user info complete>>>>>>', res);
             }
           });
         },
