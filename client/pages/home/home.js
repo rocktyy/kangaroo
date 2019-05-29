@@ -29,8 +29,10 @@ Page({
         this.pageInit(user.userId);
       },
       () => {
-        // 获取用户信息失败
-        console.log("获取用户信息失败");
+        // 新建回寄订单
+        my.showToast({
+          content: "获取用户信息失败，请重试",
+        });
       }
     );
   },
@@ -56,7 +58,9 @@ Page({
         
       }else{
         // 新建回寄订单
-        console.log('请求失败，请重试');
+        my.showToast({
+          content: "系统繁忙，请重试",
+        });
       }
     }); 
   },
