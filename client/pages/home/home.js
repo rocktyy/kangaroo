@@ -17,6 +17,15 @@ Page({
     authorizeButton:'点击授权使用芝麻信用分',
   },
 
+  onShow() {
+    // 页面加载
+    let user = app.userInfo && app.userInfo.userId;
+    if(user){
+      // 首页初始化
+      this.pageInit(user);
+    }
+  },
+
   onLoad() {
     // 初始化userId
     app.getUserInfo().then(
@@ -54,6 +63,7 @@ Page({
           urlRange: res.urlRange,
           applyStatus : res.applyInfo && res.applyInfo.applyStatus || 0,
         });
+        console.log(res.startDate)
         app.startDate = res.startDate;
         
       }else{
@@ -66,9 +76,11 @@ Page({
   },
 
   compareDate(){
+    console.log(app.startDate)
     let startDate = app.startDate;
     let d1Timestamp = Date.parse(new Date());
     let d2Timestamp = Date.parse(new Date(Date.parse(startDate)));
+    console.log(d1Timestamp,d2Timestamp);
     return !!(d1Timestamp>d2Timestamp);
   },
 
@@ -83,6 +95,7 @@ Page({
       });
       return false;
     }
+    // console.log(this.data.count , this.data.maxCount)
     if(this.data.count > this.data.maxCount){
       my.alert({
         title: '活动提示',
@@ -155,13 +168,13 @@ Page({
       tradeNO: '201711152100110410533667792', 
       success: (res) => {
         my.alert({
-        content: JSON.stringify(res),
-      });
+          content: JSON.stringify(res),
+        });
       },
       fail: (res) => {
         my.alert({
-        content: JSON.stringify(res),
-      });
+          content: JSON.stringify(res),
+        });
       }
     });
   },

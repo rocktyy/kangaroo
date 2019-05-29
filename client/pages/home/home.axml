@@ -9,7 +9,7 @@
         <image class="media" src="../../assets/media.png" onTap="imgClick" ></image>
       </view>
       <button class="content-apply"  type="default"  onTap="openModal">{{applyButton}}</button>
-      <view a:if="{{applyStatus === 1}}">
+      <view a:if="{{applyStatus === 3}}">
         <button class="content-return" type="primary"  onTap="sendBack">{{returnButton}}</button>
       </view>
       
