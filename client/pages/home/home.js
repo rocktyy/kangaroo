@@ -53,8 +53,8 @@ Page({
 
   compareDate(){
     let startDate = app.startDate;
-    var d1Timestamp = Date.parse(new Date());
-    var d2Timestamp = Date.parse(new Date(startDate));
+    let d1Timestamp = Date.parse(new Date());
+    let d2Timestamp = Date.parse(new Date(Date.parse(startDate)));
     return !!(d1Timestamp>d2Timestamp);
   },
 
