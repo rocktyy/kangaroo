@@ -68,7 +68,7 @@
 .activity {
   width: 674rpx;
   height: 1110rpx;
-  margin-top: -210rpx;
+  margin-top: -40rpx;
 }
 
 .free {

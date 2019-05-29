@@ -18,4 +18,6 @@ module.exports = app => {
   router.post('/sendBack/init', controller.sendback.getSendBackInfo);
   router.post('/sendBack/add', controller.sendback.addAccount);
   
+  router.post('/order/getTradeNo', controller.order.getTradeNo);
+  
 };
