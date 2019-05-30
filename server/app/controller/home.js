@@ -36,7 +36,7 @@ class HomeController extends Controller {
       where: { activity_id: activityId } } );
     // 获取申请单的个数 
     const count = await this.searchApplyCount(activityId, userId);
-    const applyInfo = await this.searchApplyInfo();
+    const applyInfo = await this.searchApplyInfo(activityId, userId);
     const result = record && record[0] || {};
     const maxCount = result.max_count || 50;
     const startDate = result.start_date || '2019-6-01 8:00';
