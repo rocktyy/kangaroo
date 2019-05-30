@@ -16,6 +16,9 @@
       </view>
       <view a:else="{{applyStatus === 3}}">
         <view>恭喜你审核通过，请等待快递</view>
+        <view>
+          <button class="freeze-button" onTap="submitAppFreeze">完成预授权</button>
+        </view>
       </view>
       <view a:else="{{applyStatus === 4}}">
         <view>对不起没有申请到, 可以关注生活号，等待下期活动</view>

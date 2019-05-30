@@ -2,10 +2,8 @@
   "pages": [
     "pages/home/home",
     "pages/apply/apply",
-    "pages/upload_img/upload_img",
     "pages/send_back/send_back",
-    "pages/agreement/agreement",
-    "pages/manage/manage",
+    "pages/upload_img/upload_img",
     "pages/agreement/agreement",
     "pages/webview/webview",
     "pages/manage/manage"

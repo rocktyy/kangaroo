@@ -8,7 +8,9 @@
               </view>
           </view>
       </block>
-      <view class="addImgBox" onTap="addImg" a:if="{{canAddImg}}"><text>{{addImgText}}</text></view>
+      <view class="addImgBox" onTap="addImg" a:if="{{canAddImg}}">
+        <image class="upload-img" src="{{photoImg}}"></image>
+      </view>
   </view>
   <button type="default" onTap="toUploadImg" class="submit-button"> 提交 </button>
 </view>

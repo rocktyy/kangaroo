@@ -35,16 +35,13 @@ class HomeController extends Controller {
     const record = await this.app.mysql.select('activity_info', {
       where: { activity_id: activityId } } );
     // 获取申请单的个数 
-    const count = await this.searchApplyCount(activityId, userId);
+    const count = await this.searchApplyCount();
     const applyInfo = await this.searchApplyInfo(activityId, userId);
     const result = record && record[0] || {};
     const maxCount = result.max_count || 50;
-    const startDate = result.start_date || '2019-6-01 8:00';
+    const startDate = result.start_date || '2019/6/01 8:00';
     const urlRange = result.url_range || 'https://xiaochengxu.autovideogroup.com';
 
-    console.log("count" + count);
-    console.log("activityId" + activityId);
-    console.log("result" + JSON.stringify(result));
     if(!result){
       // 查询失败或者无数据
       this.ctx.body = {

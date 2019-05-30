@@ -65,7 +65,6 @@ Page({
         });
         console.log(res.startDate)
         app.startDate = res.startDate;
-        
       }else{
         // 新建回寄订单
         my.showToast({
@@ -117,69 +116,11 @@ Page({
     this.setData({
       modalOpened: true,
     });
-
-    // this.appFreeze();
-    // this.tradePay();
   },
 
   onModalClick() {
     this.setData({
       modalOpened: false,
-    });
-  },
-
-  appFreeze(){
-    let param = {
-      userId : app.userInfo || '2088302207659350',
-    }
-    //调用 获取订单ID
-    this.getFreeOrder(param).then(res=>{
-      if(res.success){
-        // 生成支付宝统一订单
-        that.setData({
-          orderNo: res.data.orderNo,
-        });
-      }
-    }); 
-  },
-
-  getFreeOrder(param) {
-    var theDemoDomain = app.demoDomain;
-    return new Promise(function (resolve, reject) {
-       my.request({
-        url: theDemoDomain+'/order/getTradeNo', 
-        method: 'POST',
-        data: param,
-        dataType: 'json',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        success: (res) => {
-          resolve(res.data);
-        },
-        fail: function(res) {
-          reject();
-        }
-      });
-    });
-  },
-
-  tradePay(){
-    my.tradePay({
-      tradeNO: 'alipay_sdk=alipay-sdk-java-3.7.73.ALL&app_id=2019051364502296&biz_content=%7B%22amount%22%3A%220.02%22%2C%22extra_param%22%3A%22%7B%5C%22category%5C%22%3A%5C%22RENT_CAR_GOODS%5C%22%7D%22%2C%22order_title%22%3A%22%E6%94%AF%E4%BB%98%E5%AE%9D%E8%B5%84%E9%87%91%E6%8E%88%E6%9D%83%22%2C%22out_order_no%22%3A%221559187476230%22%2C%22out_request_no%22%3A%221559187476230%22%2C%22payee_user_id%22%3A%222088721126886588%22%2C%22product_code%22%3A%22PRE_AUTH_ONLINE%22%7D&charset=utf-8&format=json&method=alipay.fund.auth.order.app.freeze&notify_url=http%3A%2F%2Fapp2138419400test.mapp-test.xyz&sign=x%2BgI7f9CFnBq9Xvce9ywUVpRetM5OSxlyb49f%2FK1gK5UCKEZYefSvdyIVWoGgO7R3%2FCyhfXHlzZkaq4RfnUgaJLGpkfScbFxVv1nO60snEj9kcWcAQI%2FySdAYv6EUnoj9woJlSnNLlR0aOmMG45oNNB51bq770CfEYap%2FRINS8DjRft0sqG5bMHRHmKetJOWBksUabjI1RcoL0M16I9eZxOYd63YPIAWVdK0yIFH89GhahmcAapud9KO3HZlmgbtYvtjn3Ugb5HGKRb%2BKuOObn1gv%2BbW%2F2va8Ozrl4vEjEsQ0rSIJWyHJfNIHaP4ZDjlZoOlA2IAQHCph2nm9cfFmA%3D%3D&sign_type=RSA2&timestamp=2019-05-30+11%3A37%3A56&version=1.0', 
-      success: (res) => {
-
-        my.alert({
-          title:'成功',
-          content: JSON.stringify(res),
-        });
-      },
-      fail: (res) => {
-        my.alert({
-          title:'失败',
-          content: JSON.stringify(res),
-        });
-      }
     });
   },
 
