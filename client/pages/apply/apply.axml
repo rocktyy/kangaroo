@@ -44,13 +44,13 @@
       
       <view class="page-section">
         <view class="form-row">
-          <view class="form-row-label">姓名：</view>
+          <view class="form-row-label">用户姓名：</view>
           <view class="form-row-content">
             <input class="input" name="name" />
           </view>
         </view>
         <view class="form-row">
-          <view class="form-row-label">微信号：</view>
+          <view class="form-row-label">微信号码：</view>
           <view class="form-row-content">
             <input class="input" name="wechat_id" maxlength="60" />
           </view>
@@ -64,7 +64,7 @@
           </view>
         </view>
         <view class="form-row sms-block">
-          <view class="form-row-label">验证码：</view>
+          <view class="form-row-label">验证号码：</view>
           <view class="form-row-content">
             <input class="input" name="sms_num" maxlength="6" />
             <button class="sms-tips" onTap="getSmsCaptcha" disabled='{{captchaDisabled}}'>{{captchaTxt}}</button>
@@ -93,13 +93,19 @@
           </view>
         </view>
         <view class="form-row">
-          <view class="form-row-label">年龄：</view>
+          <view class="form-row-label">宝宝年龄：</view>
           <view class="form-row-content">
-            <input class="number" name="child_age" />
+            <picker onChange="bindBabyPickerChange" name="child_age" 
+              value={{babyAge}} range="{{babyAgeArray}}">
+              <view class="row">
+                <view class="row-title"></view>
+                <view class="row-extra">{{babyAgeArray[babyAge] + '岁'}} </view>
+              </view>
+            </picker>
           </view>
         </view>
         <view class="form-row">
-          <view class="form-row-label-large">预计使用(月)：</view>
+          <view class="form-row-label-large">预计使用：</view>
           <view class="form-row-content">
             <picker onChange="bindPickerChange" name="use_last_day" 
               value={{useDay}} range="{{useDayArray}}">
