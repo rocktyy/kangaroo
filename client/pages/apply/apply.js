@@ -22,6 +22,8 @@ Page({
     applyStatus: 0,
     birthCertificate:'',
     btnText: '点击上传',
+    babyAge: 0,
+    babyAgeArray: [1,2,3],
     useDay: 2,
     useDayArray: [1,2,3,4,5,6,7,8,9],
   },
@@ -64,6 +66,12 @@ Page({
     this.setData({
       mobile: val
     })
+  },
+
+  bindBabyPickerChange(e) {
+    this.setData({
+      babyAge: e.detail.value,
+    });
   },
 
   bindPickerChange(e) {
@@ -139,6 +147,7 @@ Page({
      imgUrl = app.imgUrl,
      param = {
        ...e.detail.value,
+       child_age: this.data.babyAge + 1,
        use_last_day: this.data.useDay + 1,
        birth_certificate: imgUrl,
        activity_id,
