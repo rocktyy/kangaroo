@@ -65,7 +65,7 @@ class OrderController extends Controller {
           outOrderNo: orderId,
           outRequestNo: orderId,
           amount: "0.02",
-          payeeUserId: "2088002995504664",
+          payeeUserId: "2088721126886588",
           //需要支持信用授权，该字段必传
           extraParam: {
             "category": "RENT_CAR_GOODS",

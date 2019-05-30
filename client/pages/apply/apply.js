@@ -23,7 +23,7 @@ Page({
     birthCertificate:'',
     btnText: '点击上传',
     useDay: 2,
-    useDayArray: [1,2,3,4,5,6,7,8,9,10,11],
+    useDayArray: [1,2,3,4,5,6,7,8,9],
   },
   onLoad(query) {
     this.countdown = new CountDown(this);
@@ -68,9 +68,10 @@ Page({
 
   bindPickerChange(e) {
     this.setData({
-      index: e.detail.value,
+      useDay: e.detail.value,
     });
   },
+  
 
   getSmsCaptcha(e) {
     var that = this;

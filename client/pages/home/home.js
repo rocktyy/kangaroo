@@ -17,6 +17,15 @@ Page({
     authorizeButton:'点击授权使用芝麻信用分',
   },
 
+  onShow() {
+    // 页面加载
+    let user = app.userInfo && app.userInfo.userId;
+    if(user){
+      // 首页初始化
+      this.pageInit(user);
+    }
+  },
+
   onLoad() {
     // 初始化userId
     app.getUserInfo().then(
@@ -54,6 +63,7 @@ Page({
           urlRange: res.urlRange,
           applyStatus : res.applyInfo && res.applyInfo.applyStatus || 0,
         });
+        console.log(res.startDate)
         app.startDate = res.startDate;
         
       }else{
@@ -66,9 +76,11 @@ Page({
   },
 
   compareDate(){
+    console.log(app.startDate)
     let startDate = app.startDate;
     let d1Timestamp = Date.parse(new Date());
     let d2Timestamp = Date.parse(new Date(Date.parse(startDate)));
+    console.log(d1Timestamp,d2Timestamp);
     return !!(d1Timestamp>d2Timestamp);
   },
 
@@ -83,6 +95,7 @@ Page({
       });
       return false;
     }
+    // console.log(this.data.count , this.data.maxCount)
     if(this.data.count > this.data.maxCount){
       my.alert({
         title: '活动提示',
@@ -105,7 +118,8 @@ Page({
       modalOpened: true,
     });
 
-    //this.appFreeze();
+    // this.appFreeze();
+    // this.tradePay();
   },
 
   onModalClick() {
@@ -152,16 +166,19 @@ Page({
 
   tradePay(){
     my.tradePay({
-      tradeNO: '201711152100110410533667792', 
+      tradeNO: 'alipay_sdk=alipay-sdk-java-3.7.73.ALL&app_id=2019051364502296&biz_content=%7B%22amount%22%3A%220.02%22%2C%22extra_param%22%3A%22%7B%5C%22category%5C%22%3A%5C%22RENT_CAR_GOODS%5C%22%7D%22%2C%22order_title%22%3A%22%E6%94%AF%E4%BB%98%E5%AE%9D%E8%B5%84%E9%87%91%E6%8E%88%E6%9D%83%22%2C%22out_order_no%22%3A%221559187476230%22%2C%22out_request_no%22%3A%221559187476230%22%2C%22payee_user_id%22%3A%222088721126886588%22%2C%22product_code%22%3A%22PRE_AUTH_ONLINE%22%7D&charset=utf-8&format=json&method=alipay.fund.auth.order.app.freeze&notify_url=http%3A%2F%2Fapp2138419400test.mapp-test.xyz&sign=x%2BgI7f9CFnBq9Xvce9ywUVpRetM5OSxlyb49f%2FK1gK5UCKEZYefSvdyIVWoGgO7R3%2FCyhfXHlzZkaq4RfnUgaJLGpkfScbFxVv1nO60snEj9kcWcAQI%2FySdAYv6EUnoj9woJlSnNLlR0aOmMG45oNNB51bq770CfEYap%2FRINS8DjRft0sqG5bMHRHmKetJOWBksUabjI1RcoL0M16I9eZxOYd63YPIAWVdK0yIFH89GhahmcAapud9KO3HZlmgbtYvtjn3Ugb5HGKRb%2BKuOObn1gv%2BbW%2F2va8Ozrl4vEjEsQ0rSIJWyHJfNIHaP4ZDjlZoOlA2IAQHCph2nm9cfFmA%3D%3D&sign_type=RSA2&timestamp=2019-05-30+11%3A37%3A56&version=1.0', 
       success: (res) => {
+
         my.alert({
-        content: JSON.stringify(res),
-      });
+          title:'成功',
+          content: JSON.stringify(res),
+        });
       },
       fail: (res) => {
         my.alert({
-        content: JSON.stringify(res),
-      });
+          title:'失败',
+          content: JSON.stringify(res),
+        });
       }
     });
   },
