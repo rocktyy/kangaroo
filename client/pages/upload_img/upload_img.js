@@ -3,6 +3,7 @@ const app = getApp();
 Page({
   data: {
     imgUrls: [],
+    photoImg: '../../assets/upload.png',
     addImgText: "拍照/相册",
     canAddImg: true,
     maxAddImgNum: 1,

@@ -3,6 +3,7 @@
   width: 600rpx;
   height: 600rpx;
   margin: 30rpx auto; 
+  border: #aaa dashed 1px;
 }
 .imgBox, .addImgBox { 
   display: inline-block;
@@ -11,6 +12,14 @@
   margin: 0 auto;
   position: relative;
   vertical-align: middle 
+}
+.upload-img{
+  width: 180rpx;
+  height: 210rpx;
+  position: absolute; 
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .imgBox image,.addImgBox text { 
   width: 600rpx;

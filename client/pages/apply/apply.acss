@@ -87,6 +87,16 @@ input {
   text-decoration:underline;
 }
 
+.freeze-button {
+  width: 80%;
+  margin: 20rpx auto ;
+  letter-spacing: 4rpx;
+  font-size: 32rpx;
+  color: #fff;
+  border-radius: 50rpx;
+  background-color: rgb(216, 112, 216);
+}
+
 .apply-button {
   letter-spacing: 16rpx;
   font-size: 48rpx;
