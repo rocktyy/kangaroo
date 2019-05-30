@@ -50,7 +50,7 @@ button {
 }
 
 .form-row-label {
-  width: 180rpx;
+  width: 160rpx;
   font-size: 28rpx;
   margin-right: 10rpx;
   text-align: left;
