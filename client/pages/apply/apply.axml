@@ -1,7 +1,7 @@
 
 <header src="../../assets/back_top.png" />
 
-<view class="content" a:if="{{applyStatus !== 0}}">
+<view class="page" a:if="{{applyStatus !== 0}}">
   <view class="main">
     <view a:if="{{applyStatus === 1}}">
       <image class="tips-icon" src="../../assets/right.png" ></image> 
