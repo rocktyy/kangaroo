@@ -20,7 +20,9 @@ Page({
   },
 
   onLoad() {
-    // 初始化userId
+  },
+
+  getInfo(){
     app.getUserInfo().then(
       user => {
         this.setData({
@@ -33,7 +35,7 @@ Page({
       () => {
         // 新建回寄订单
         my.showToast({
-          content: "获取用户信息失败，请重试",
+          content: "获取用户信息失败，授权通过可继续使用",
         });
       }
     );
@@ -56,8 +58,10 @@ Page({
           urlRange: res.urlRange,
           applyStatus : res.applyInfo && res.applyInfo.applyStatus || 0,
         });
-        console.log(res.startDate)
+        console.log(res.startDate);
         app.startDate = res.startDate;
+        // 跳转弹窗
+        this.openModal();
       }else{
         // 新建回寄订单
         my.showToast({
@@ -103,14 +107,7 @@ Page({
   },
 
   openModal() {
-    let urlRange  = this.data.urlRange;
-    if(!urlRange){
-      my.showToast({
-        content: "手速太快，稍后再试！",
-      });
-      return;
-    }
-
+    // 活动校验
     if(!this.activityCheck()){
       return;
     }

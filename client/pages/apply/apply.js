@@ -193,6 +193,7 @@ Page({
        use_last_day: this.data.useDay + 1,
        birth_certificate: imgUrl,
        wechat_id: '',
+       id_card: '',
        activity_id,
        userId,
      };

@@ -69,12 +69,6 @@
             <input class="input" name="address"/>
           </view>
         </view>
-        <view class="form-row">
-          <view class="form-row-label">身份证号：</view>
-          <view class="form-row-content">
-            <input type="idcard" name="id_card" maxlength="18" />
-          </view>
-        </view>
       </view>
       
       <view class="page-description">宝宝信息</view>
