@@ -99,7 +99,7 @@
               value={{babyAge}} range="{{babyAgeArray}}">
               <view class="row">
                 <view class="row-title"></view>
-                <view class="row-extra">{{babyAgeArray[babyAge] + '岁'}} </view>
+                <view class="row-extra">{{babyAgeArray[babyAge] + '月'}} </view>
               </view>
             </picker>
           </view>

@@ -23,7 +23,7 @@ Page({
     birthCertificate:'',
     btnText: '点击上传',
     babyAge: 0,
-    babyAgeArray: [1,2,3],
+    babyAgeArray: [1,2,3,4,5,6,7,8],
     useDay: 2,
     useDayArray: [1,2,3,4,5,6,7,8,9],
   },
