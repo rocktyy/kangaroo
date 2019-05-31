@@ -14,7 +14,7 @@ Page({
     applyStatus: 0, //0未申请 1为申请
     applyButton:'申请安全座椅',
     returnButton:'退还安全座椅',
-    authorizeButton:'点击授权使用芝麻信用分',
+    authorizeButton:'点击申请安全座椅',
   },
 
   onShow() {
@@ -110,6 +110,14 @@ Page({
   },
 
   openModal() {
+    let urlRange  = this.data.urlRange;
+    if(!urlRange){
+      my.showToast({
+        content: "手速太快，稍后再试！",
+      });
+      return;
+    }
+
     if(!this.activityCheck()){
       return;
     }
@@ -159,9 +167,9 @@ Page({
       });
       return;
     }
-    my.showToast({
-      content: "签约支付宝预授权协议",
-    });
+    // my.showToast({
+    //   content: "签约支付宝预授权协议",
+    // });
 
     that.onModalClick();
     setTimeout(function(){
@@ -173,9 +181,13 @@ Page({
     },1000)
   },
   imgClick(event){
+    let urlRange  = this.data.urlRange;
+    if(!urlRange){
+      return;
+    }
     // 图片点击，视频播放
     my.navigateTo({
-      url: '../webview/webview?videoUrl='+this.data.urlRange+'/video1.html'
+      url: '../webview/webview?videoUrl='+urlRange+'/video1.html'
     })
   },
 
@@ -231,9 +243,13 @@ Page({
   },
 
   secondImgClick(event){
+    let urlRange  = this.data.urlRange;
+    if(!urlRange){
+      return;
+    }
     // 图片点击，视频播放
     my.navigateTo({
-      url: '../webview/webview?videoUrl='+this.data.urlRange+'/video2.html'
+      url: '../webview/webview?videoUrl='+urlRange+'/video2.html'
     })
   },
 })

@@ -5,7 +5,6 @@ var sendSms = require('../../common/sms/sendSms');
 
 const applyInfo = {
   name: '姓名',
-  wechat_id: '微信号',
   telphone_num: '手机号码',
   sms_num: '验证码',
   address: '收货地址',
@@ -150,6 +149,7 @@ Page({
        child_age: this.data.babyAge + 1,
        use_last_day: this.data.useDay + 1,
        birth_certificate: imgUrl,
+       wechat_id: '',
        activity_id,
        userId,
      };

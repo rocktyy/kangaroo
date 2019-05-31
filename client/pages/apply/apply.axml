@@ -33,7 +33,7 @@
     <view class="rule" >温馨提示：</view>
     <view class="rule" >1、审核时间：我们将在5个工作日内审核完成，请耐心等待。</view>
     <view class="rule" >2、审核结果：可以通过支付宝通知查询，或关注短信通知查看。</view>
-    <view class="rule" >3、有任何疑问，请加“袋鼠行动”专属客服微信进行咨询：daishuxingdong 。</view>
+    <view class="rule" >3、有任何疑问，请拨打“袋鼠行动”专属客服电话：‭152-1063-5193‬ 。</view>
   </view> 
 </view>
 <view a:else="{{applyStatus === 0}}">
@@ -49,13 +49,6 @@
             <input class="input" name="name" />
           </view>
         </view>
-        <view class="form-row">
-          <view class="form-row-label">微信号码：</view>
-          <view class="form-row-content">
-            <input class="input" name="wechat_id" maxlength="60" />
-          </view>
-        </view>
-
         <view class="form-row">
           <view class="form-row-label">手机号码：</view>
           <view class="form-row-content">
