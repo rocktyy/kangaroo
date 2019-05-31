@@ -6,7 +6,7 @@
 
   <view class="content"> 
       <view class="content-avatar">
-        <image class="media" src="../../assets/media.png" onTap="imgClick" ></image>
+        <image class="media" src="../../assets/media.png"></image>
       </view>
       <button class="content-apply"  type="default"  onTap="openModal">{{applyButton}}</button>
       <view a:if="{{applyStatus === 3}}">
@@ -17,12 +17,12 @@
       <image class="introduce"  src="../../assets/introduce.png" background-size="cover"></image> 
     </view>
     
-    <view class="history-activity">
+    <!-- <view class="history-activity">
       <image class="activity"  src="../../assets/activity.png" background-size="cover"></image> 
-    </view>
+    </view> -->
 
     <view class="free-content">
-      <image class="free" onTap="secondImgClick" src="../../assets/free.png" background-size="cover" ></image> 
+      <image class="free" src="../../assets/free.png" background-size="cover" ></image> 
     </view> 
 
     <view class="bottom-content">
@@ -34,23 +34,4 @@
     </view>
   </view>
 
-  <modal
-    show="{{modalOpened}}"
-    onModalClose="onModalClick"
-    advice="{{true}}"
-    >
-    <view style="display: flex; width: 280px; height: 210px; border-radius: 10px;">
-      <view class="activity-content">
-        <view class="agreement">
-          <radio-group class="agreement-radio" name="agreement-radio" onChange="radioChange">
-            <label class="agreement-check-radio">
-              <radio value={{agreementCheck}}/>
-            </label>
-          </radio-group>
-          <button class="agreement-text" onTap="linkAgreement">同意袋鼠行动相关协议</button> 
-        </view>
-        <button class="apply-button" onTap="onAuthorize">{{authorizeButton}}</button>
-      </view>
-    </view>
-  </modal>
 </view>

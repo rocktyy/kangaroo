@@ -13,10 +13,14 @@ const applyInfo = {
   child_age: '宝宝年龄',
   use_last_day: '预计时长',
   birth_certificate: '宝宝出生证明',
+  authorizeButton:'点击申请安全座椅',
 }
 
 Page({
   data: {
+    modalOpened: false,
+    agree: false,
+    agreementCheck: false,
     mobile: '',
     applyStatus: 0,
     birthCertificate:'',
@@ -39,7 +43,38 @@ Page({
       });
     }
   },
+  openModal() {
+    this.setData({
+      modalOpened: true,
+    });
+  },
 
+  onAuthorize() {
+    let that = this;
+    let agreementCheck = this.data.agreementCheck;
+    if(!agreementCheck){
+      my.showToast({
+        content: "请同意袋鼠行动协议",
+      });
+      return;
+    }
+    this.setData({
+      agree: true,
+    });
+    that.onModalClick();
+  },
+
+  onModalClick() {
+    this.setData({
+      modalOpened: false,
+    });
+  },
+
+  radioChange(e) {
+    this.setData({
+      agreementCheck: true,
+    });
+  },
   initPage(){
     var that =this,
      userId = app.userInfo && app.userInfo.userId || '10002',
@@ -78,7 +113,6 @@ Page({
       useDay: e.detail.value,
     });
   },
-  
 
   getSmsCaptcha(e) {
     var that = this;
@@ -140,6 +174,15 @@ Page({
     if(!this.valueCheck(e.detail.value)){
       return;
     }
+
+    // that.openModal();
+
+    // if(!this.data.agree){
+    //   my.showToast({
+    //     content: "同意授权使用芝麻信用分"
+    //   });
+    //   return;
+    // }
 
     var userId = app.userInfo && app.userInfo.userId || '10002',
      activity_id = app.activityId,

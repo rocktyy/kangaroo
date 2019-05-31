@@ -1,7 +1,7 @@
 
 .page-home {
   width: 100%;
-  height: 3750rpx;
+  height: 2900rpx;
   background-image: url(../../assets/bg.png);
 }
 
@@ -75,7 +75,7 @@
 .free {
   width: 750rpx;
   height: 434rpx;
-  margin: 30rpx auto;
+  margin: 80rpx auto;
 }
 
 .bottom-logo {
