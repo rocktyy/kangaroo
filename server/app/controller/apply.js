@@ -10,9 +10,11 @@ class ApplyController extends Controller {
       'SELECT COUNT(*) as ? FROM `apply_info` WHERE `apply_status` = ?',
       ['count', 1]
     );
-    const MaxRecord = await this.app.mysql.select('apply_info');
+    const MaxRecord = await this.app.mysql.select('activity_info');
     const applyCount = record && record[0] || 0;
     const maxCount = MaxRecord && MaxRecord[0] || {};
+    console.log(MaxRecord);
+    console.log(this.config);
 
     return {
       count: applyCount.count,
@@ -26,16 +28,14 @@ class ApplyController extends Controller {
     
     // 查询申请单个数
     const { count, maxCount } = await this.searchApplyCount();
-
+    console.log(count, maxCount)
     if( count >= maxCount){
-      // 申请单超过最大申请数量
-      if(dataInfo.length === 0){
-        this.ctx.body = {
-          success: false,
-          data: '服务正忙，稍后再试'  
-        }
-        return;
+      // 申请单超过最大申请数量 
+      this.ctx.body = {
+        success: false,
+        data: '服务正忙，稍后再试'  
       }
+      return;
     }
 
     const param = {

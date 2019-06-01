@@ -5,7 +5,6 @@ var sendSms = require('../../common/sms/sendSms');
 
 const applyInfo = {
   name: '姓名',
-  wechat_id: '微信号',
   telphone_num: '手机号码',
   sms_num: '验证码',
   address: '收货地址',
@@ -14,10 +13,14 @@ const applyInfo = {
   child_age: '宝宝年龄',
   use_last_day: '预计时长',
   birth_certificate: '宝宝出生证明',
+  authorizeButton:'点击申请安全座椅',
 }
 
 Page({
   data: {
+    modalOpened: false,
+    agree: false,
+    agreementCheck: false,
     mobile: '',
     applyStatus: 0,
     birthCertificate:'',
@@ -40,10 +43,41 @@ Page({
       });
     }
   },
+  openModal() {
+    this.setData({
+      modalOpened: true,
+    });
+  },
 
+  onAuthorize() {
+    let that = this;
+    let agreementCheck = this.data.agreementCheck;
+    if(!agreementCheck){
+      my.showToast({
+        content: "请同意袋鼠行动协议",
+      });
+      return;
+    }
+    this.setData({
+      agree: true,
+    });
+    that.onModalClick();
+  },
+
+  onModalClick() {
+    this.setData({
+      modalOpened: false,
+    });
+  },
+
+  radioChange(e) {
+    this.setData({
+      agreementCheck: true,
+    });
+  },
   initPage(){
     var that =this,
-     userId = app.userInfo && app.userInfo.userId || '10002',
+     userId = app.userInfo && app.userInfo.userId,
      activity_id = app.activityId,
      param = {
        userId,
@@ -79,7 +113,6 @@ Page({
       useDay: e.detail.value,
     });
   },
-  
 
   getSmsCaptcha(e) {
     var that = this;
@@ -142,17 +175,21 @@ Page({
       return;
     }
 
-    var userId = app.userInfo && app.userInfo.userId || '10002',
-     activity_id = app.activityId,
-     imgUrl = app.imgUrl,
-     param = {
+    // that.openModal();
+
+    var userId = app.userInfo && app.userInfo.userId,
+      activity_id = app.activityId,
+      imgUrl = app.imgUrl,
+      param = {
        ...e.detail.value,
        child_age: this.data.babyAge + 1,
        use_last_day: this.data.useDay + 1,
        birth_certificate: imgUrl,
+       wechat_id: '',
+       id_card: '',
        activity_id,
        userId,
-     };
+    };
 
     this.applyChair(param).then(res=>{
       if(res.success){

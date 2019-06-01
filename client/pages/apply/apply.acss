@@ -4,10 +4,6 @@ page {
 input {
   font-size: 30rpx;
 }
-.content{
-  width: 100%;
-  background-color: #29d7d4;
-}
 
 .main {
   width: 700rpx;
