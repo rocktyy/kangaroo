@@ -2,11 +2,41 @@
 const Controller = require('egg').Controller; 
 
 class ApplyController extends Controller {
+  /**
+   * 查询订单接口，查询申请单数量
+   */
+  async searchApplyCount(){
+    const record = await this.app.mysql.query(
+      'SELECT COUNT(*) as ? FROM `apply_info` WHERE `apply_status` = ?',
+      ['count', 1]
+    );
+    const MaxRecord = await this.app.mysql.select('apply_info');
+    const applyCount = record && record[0] || 0;
+    const maxCount = MaxRecord && MaxRecord[0] || {};
+
+    return {
+      count: applyCount.count,
+      maxCount:  maxCount.max_count
+    }
+  }
 
   async addApplyChair() {
-    console.log("===========addApplyChair===========");
     const addParam = this.ctx.request.body;
     const { userId, activity_id } = this.ctx.request.body;
+    
+    // 查询申请单个数
+    const { count, maxCount } = await this.searchApplyCount();
+
+    if( count >= maxCount){
+      // 申请单超过最大申请数量
+      if(dataInfo.length === 0){
+        this.ctx.body = {
+          success: false,
+          data: '服务正忙，稍后再试'  
+        }
+        return;
+      }
+    }
 
     const param = {
       apply_id: userId + '_' + activity_id,
@@ -69,13 +99,11 @@ class ApplyController extends Controller {
     // 从url的query中取得userId
     var { activity_id, userId } = this.ctx.request.body;
     const dataInfo = await this.searchApplyInfo(activity_id, userId);
-
     const result = dataInfo && dataInfo[0] || {};
-
-    if(Object.keys(result).length === 0){
+    if(dataInfo.length === 0){
       this.ctx.body = {
         success: false,
-        data: '服务正忙，请稍后再试'  
+        data: '服务正忙，稍后再试'  
       }
       return;
     }

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/home/home",
     "pages/apply/apply",
+    "pages/home/home",
     "pages/send_back/send_back",
     "pages/upload_img/upload_img",
     "pages/agreement/agreement",

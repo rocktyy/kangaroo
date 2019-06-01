@@ -8,7 +8,7 @@ App({
   startDate: '2019/6/01 8:00',
 
   // 请修改为您的小程序云应用的真实域名
-  demoDomain: 'https://kangarooaaction.autovideogroup.com',
+  demoDomain: 'https://app2138419400test.mapp-test.xyz',
 
   getUserInfo() {
     var theDemoDomain = this.demoDomain;
