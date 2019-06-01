@@ -20,6 +20,23 @@ Page({
   },
 
   onLoad() {
+    // my.getAuthCode({
+    //   scopes: 'auth_user',
+    //   success: (res) => {
+    //     my.getAuthUserInfo({
+    //       success: (userInfo) => {
+    //         my.alert({
+    //           content: JSON.stringify(userInfo),
+    //         }); 
+    //       }
+    //     });
+    //     my.getOpenUserInfo({
+    //       success: (userinfo) => {
+    //       console.log(userinfo)
+    //       }
+    //     });
+    //   },
+    // });
   },
 
   getInfo(){

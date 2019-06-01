@@ -4,7 +4,6 @@ const Controller = require('egg').Controller;
 class ApplyController extends Controller {
 
   async addApplyChair() {
-    console.log("===========addApplyChair===========");
     const addParam = this.ctx.request.body;
     const { userId, activity_id } = this.ctx.request.body;
 
@@ -26,10 +25,8 @@ class ApplyController extends Controller {
 
     const newTask = {
       ...param,
-      alipay_user_id: userId
+      alipay_user_id : userId || 'userId',
     }
-    // 向数据库插入数据
-    console.log("===========insertInfo===========", newTask); 
  
     try{ 
       const dataInfo = await this.app.mysql.insert('apply_info', newTask);

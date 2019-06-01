@@ -77,7 +77,7 @@ Page({
   },
   initPage(){
     var that =this,
-     userId = app.userInfo && app.userInfo.userId || '10002',
+     userId = app.userInfo && app.userInfo.userId,
      activity_id = app.activityId,
      param = {
        userId,
@@ -177,17 +177,10 @@ Page({
 
     // that.openModal();
 
-    // if(!this.data.agree){
-    //   my.showToast({
-    //     content: "同意授权使用芝麻信用分"
-    //   });
-    //   return;
-    // }
-
-    var userId = app.userInfo && app.userInfo.userId || '10002',
-     activity_id = app.activityId,
-     imgUrl = app.imgUrl,
-     param = {
+    var userId = app.userInfo && app.userInfo.userId,
+      activity_id = app.activityId,
+      imgUrl = app.imgUrl,
+      param = {
        ...e.detail.value,
        child_age: this.data.babyAge + 1,
        use_last_day: this.data.useDay + 1,
@@ -196,7 +189,7 @@ Page({
        id_card: '',
        activity_id,
        userId,
-     };
+    };
 
     this.applyChair(param).then(res=>{
       if(res.success){
