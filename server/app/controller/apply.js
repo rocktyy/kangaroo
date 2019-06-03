@@ -6,7 +6,6 @@ class ApplyController extends Controller {
   async addApplyChair() {
     const addParam = this.ctx.request.body;
     const { userId, activity_id } = this.ctx.request.body;
-
     const param = {
       apply_id: userId + '_' + activity_id,
       activity_id,
@@ -22,7 +21,6 @@ class ApplyController extends Controller {
       birth_certificate: addParam.birth_certificate,
       apply_status: 1,
     }
-
     const newTask = {
       ...param,
       alipay_user_id : userId || 'userId',
@@ -31,7 +29,6 @@ class ApplyController extends Controller {
     try{ 
       const dataInfo = await this.app.mysql.insert('apply_info', newTask);
       const result = dataInfo && dataInfo[0] || {};
-
       if(dataInfo.length === 0){
         this.ctx.body = {
           success: false,
@@ -47,16 +44,20 @@ class ApplyController extends Controller {
       }
     } catch(e){
       console.log('INSERT info err>>>>>', e);
+      this.ctx.body = {
+        success: false,
+        data: '手机号已经存在，提交过申请'  
+      }
       return;
     }
   }
 
-  async searchApplyInfo(activity_id, userId) {
+  async searchApplyInfo(activity_id, telphoneNum = '') {
 
     var dataInfo = await this.app.mysql.select('apply_info', {
       where: { 
         alipay_user_id: userId,
-        activity_id,
+        telphone_num: telphoneNum || '',
       }
     });
     return dataInfo
@@ -64,8 +65,17 @@ class ApplyController extends Controller {
  
   async initApplyInfo() {
     // 从url的query中取得userId
-    var { activity_id, userId } = this.ctx.request.body;
-    const dataInfo = await this.searchApplyInfo(activity_id, userId);
+    var { activity_id, userId, telphoneNum } = this.ctx.request.body;
+    console.log("activity_id", activity_id);
+    console.log("telphoneNum", telphoneNum);
+    if(!telphoneNum){
+      this.ctx.body = {
+        success: false,
+        data: '服务正忙，请稍后再试'  
+      }
+      return; 
+    }
+    const dataInfo = await this.searchApplyInfo(activity_id, telphoneNum);
 
     const result = dataInfo && dataInfo[0] || {};
 
