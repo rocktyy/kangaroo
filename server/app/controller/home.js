@@ -31,6 +31,7 @@ class HomeController extends Controller {
   }
 
   async index() {
+    const { logger } = this.ctx;
     const { userId, activityId } = this.ctx.request.query;
     // 库存 第一天50，第二天50，第三天放开，总：200
     const record = await this.app.mysql.select('activity_info', {
@@ -42,7 +43,7 @@ class HomeController extends Controller {
     const maxCount = result.max_count || 50;
     const startDate = result.start_date || '2019/6/01 8:00';
     const urlRange = result.url_range || 'https://xiaochengxu.autovideogroup.com';
-    logger.debug('home index:  activity_id=  ' + activityId); 
+    logger.error('home index:  activity_id= ', activityId); 
 
     if(!result){
       // 查询失败或者无数据

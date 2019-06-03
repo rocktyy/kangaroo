@@ -75,7 +75,7 @@ class ApplyController extends Controller {
         msg: '添加成功',
       }
     } catch(e){
-      console.log('INSERT info err>>>>>', e);
+      logger.error('INSERT info err>>>>> ', e); 
       this.ctx.body = {
         success: false,
         data: '手机号已经存在，提交过申请'  
