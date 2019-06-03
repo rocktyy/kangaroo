@@ -1,6 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const Logger = require('egg-logger').Logger;
 class HomeController extends Controller {
 
   async searchApplyInfo(activityId, userId) {
@@ -41,6 +42,7 @@ class HomeController extends Controller {
     const maxCount = result.max_count || 50;
     const startDate = result.start_date || '2019/6/01 8:00';
     const urlRange = result.url_range || 'https://xiaochengxu.autovideogroup.com';
+    logger.debug('home index:  activity_id=  ' + activityId); 
 
     if(!result){
       // 查询失败或者无数据

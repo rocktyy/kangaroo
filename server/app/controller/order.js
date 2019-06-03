@@ -7,7 +7,7 @@ const AlipaySdk = require('alipay-sdk').default;
 class OrderController extends Controller {
 
   /**
-   * 获取微信统一下单参数
+   * 获取统一下单参数
    */
   getUnifiedorderXmlParams(obj){
     var body = '<xml> ' +
