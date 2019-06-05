@@ -1,4 +1,4 @@
-'use strict';
+  'use strict';
 const Controller = require('egg').Controller; 
 
 class ApplyController extends Controller {
@@ -13,9 +13,6 @@ class ApplyController extends Controller {
     const MaxRecord = await this.app.mysql.select('activity_info');
     const applyCount = record && record[0] || 0;
     const maxCount = MaxRecord && MaxRecord[0] || {};
-    console.log(MaxRecord);
-    console.log(this.config);
-
     return {
       count: applyCount.count,
       maxCount:  maxCount.max_count
@@ -58,7 +55,7 @@ class ApplyController extends Controller {
       alipay_user_id : userId || 'userId',
     }
  
-    try{ 
+    try{
       const dataInfo = await this.app.mysql.insert('apply_info', newTask);
       const result = dataInfo && dataInfo[0] || {};
       if(dataInfo.length === 0){
@@ -85,13 +82,14 @@ class ApplyController extends Controller {
   }
 
   async searchApplyInfo(activity_id, telphoneNum = '') {
-
-    var dataInfo = await this.app.mysql.select('apply_info', {
+    const { logger } = this.ctx;
+    const dataInfo = await this.app.mysql.select('apply_info', {
       where: { 
-        alipay_user_id: userId,
+        activity_id: activity_id,
         telphone_num: telphoneNum || '',
       }
     });
+    logger.info('searchApplyInfo: ', dataInfo);
     return dataInfo
   }
  
@@ -120,6 +118,7 @@ class ApplyController extends Controller {
     // 将todo项写入消息体，返回给前端
     this.ctx.body = {
       success: true,
+      apply: result,
       data: result.apply_status,
     };
   }

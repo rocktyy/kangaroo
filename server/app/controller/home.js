@@ -43,7 +43,7 @@ class HomeController extends Controller {
     const maxCount = result.max_count || 50;
     const startDate = result.start_date || '2019/6/01 8:00';
     const urlRange = result.url_range || 'https://xiaochengxu.autovideogroup.com';
-    logger.error('home index:  activity_id= ', activityId); 
+    logger.info('home index:  activity_id= ', activityId); 
 
     if(!result){
       // 查询失败或者无数据

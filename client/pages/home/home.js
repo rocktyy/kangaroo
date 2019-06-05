@@ -20,28 +20,65 @@ Page({
   },
 
   onLoad() {
-    // my.getAuthCode({
-    //   scopes: 'auth_user',
-    //   success: (res) => {
-    //     my.getAuthUserInfo({
-    //       success: (userInfo) => {
-    //         my.alert({
-    //           content: JSON.stringify(userInfo),
-    //         }); 
-    //       }
-    //     });
-    //     my.getOpenUserInfo({
-    //       success: (userinfo) => {
-    //       console.log(userinfo)
-    //       }
-    //     });
-    //   },
-    // });
     my.reportAnalytics('onHomePageLoad', {
       status: 200,
       reason: 'ok'
     });
   },
+
+  // 获取支付宝手机号
+  onGetAuthorize(){
+    my.getPhoneNumber({
+      success: (res) => {
+        let encryptedData = res.response;
+        let param = {  encryptedData : encryptedData }
+        //调用 获取订单ID
+        this.getPhoneNumberAES(param).then(res=>{
+          if(res.success){
+            // 获取解密的号码
+            that.setData({
+              PhoneNumber: res.data.PhoneNumber,
+            });
+          } else {
+            // 获取失败
+          }
+        }); 
+      },
+      fail: (res) => { 
+        console.log('getPhoneNumber_fail')
+        my.showToast({
+          content: "服务正忙，请重试",
+        });
+      },
+    });
+  },
+  onAuthError(){
+    my.showToast({
+      content: "抱歉暂时无法使用服务，请同意获取手机号继续",
+    });
+  },
+
+  getPhoneNumberAES(param) {
+      var theDemoDomain = app.demoDomain;
+      return new Promise(function (resolve, reject) {
+        my.request({
+          url: theDemoDomain+'/telphone/numberAES', 
+          method: 'POST',
+          data: param,
+          dataType: 'json',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          success: (res) => {
+            resolve(res.data);
+          },
+          fail: function(res) {
+            reject();
+          }
+        });
+      });
+    },
+
 
   getInfo(){
     app.getUserInfo().then(

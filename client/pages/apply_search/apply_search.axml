@@ -1,0 +1,64 @@
+
+<header src="../../assets/back_top.png" />
+
+<view class="page" a:if="{{applyStatus !== 0}}">
+  <view class="main">
+    <view a:if="{{applyStatus === 1}}">
+      <image class="tips-icon" src="../../assets/right.png" ></image> 
+    </view>
+    <view a:else="{{applyStatus === 4}}">
+      <image class="tips-icon" src="../../assets/error.png" ></image> 
+    </view>
+    <view class="content">
+      <view a:if="{{applyStatus === 1}}"> 
+        <view>提交成功</view>
+        <view>请等待审核</view>
+      </view>
+      <view a:else="{{applyStatus === 3}}">
+        <view>恭喜你审核通过，请等待快递</view>
+        <view>
+          <button class="freeze-button" onTap="submitAppFreeze">完成预授权</button>
+          <button class="send-button" onTap="sendBackBtn">座椅寄回</button>
+        </view>
+      </view>
+      <view a:else="{{applyStatus === 4}}">
+        <view>对不起没有申请到, 可以关注生活号，等待下期活动</view>
+      </view>
+      <view a:else="{{applyStatus === 2}}">
+        <view>申请状态，退回修改中</view>
+      </view>
+    </view>
+    <favorite type="tips" bottom="10rpx" >收藏小程序，下次使用更方便</favorite>
+  </view>
+  <view class="explain"  a:if="{{applyStatus === 1}}">
+    <view class="rule" >温馨提示：</view>
+    <view class="rule" >1、审核时间：我们将在5个工作日内审核完成，请耐心等待。</view>
+    <view class="rule" >2、审核结果：可以通过支付宝通知查询，或关注短信通知查看。</view>
+    <view class="rule" >3、有任何疑问，请拨打“袋鼠行动”专属客服电话：‭152-1063-5193‬ 。</view>
+  </view> 
+</view>
+<view a:else="{{applyStatus === 0}}">
+  <form onSubmit="formSubmit">
+    <view class="page">
+      <view class="page-section">
+        <view class="form-row">
+          <view class="form-row-label">申请手机：</view>
+          <view class="form-row-content">
+            <input class="input" name="telphoneNum" maxlength="11"
+              onInput='bindPhoneInput' />
+          </view>
+        </view>
+        <view class="form-row sms-block">
+          <view class="form-row-label">{{smsText}}</view>
+          <view class="form-row-content">
+            <input class="input" name="sms_num" maxlength="6" />
+            <button class="sms-tips" onTap="getSmsCaptcha" disabled='{{captchaDisabled}}'>{{captchaTxt}}</button>
+          </view>
+        </view>
+      </view>
+      <view>
+        <button form-type="submit" class="apply-button" onTap="submit">{{btnText}}</button>
+      </view>
+    </view>
+  </form>
+</view>

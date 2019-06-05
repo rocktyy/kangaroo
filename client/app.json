@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/apply_search/apply_search",
     "pages/home/home",
     "pages/apply/apply",
     "pages/send_back/send_back",
@@ -12,4 +13,5 @@
     "defaultTitle": "袋鼠行动",
     "titleBarColor": "#333333"
   }
+
 }
