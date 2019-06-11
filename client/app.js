@@ -35,4 +35,13 @@ App({
       });
     });
   },
+  // 获取与授权 
+  freezeUserAmount() {
+    var theDemoDomain = this.demoDomain;
+    return new Promise((resolve, reject) => {
+      if (this.authCode) resolve(this.authCode);
+      // 冻结
+      
+    });
+  },
 });

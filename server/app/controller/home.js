@@ -1,23 +1,7 @@
 'use strict';
-
 const Controller = require('egg').Controller;
-const Logger = require('egg-logger').Logger;
 class HomeController extends Controller {
-
-  async searchApplyInfo(activityId, userId) {
-
-    var dataInfo = await this.app.mysql.select('apply_info', {
-      where: { 
-        alipay_user_id: userId,
-        activity_id: activityId,
-      }
-    });
-    const applyInfo = dataInfo && dataInfo[0] || {};
-    return { 
-      useLastDay: applyInfo.use_last_day,
-      applyStatus: applyInfo.apply_status
-    };
-  }
+ 
   /**
    * 查询订单接口，查询申请单数量
    */
@@ -30,19 +14,22 @@ class HomeController extends Controller {
     return applyCount.count;
   }
 
+  /**
+   * index:首页初始化查询接口
+   */
   async index() {
     const { logger } = this.ctx;
-    const { userId, activityId } = this.ctx.request.query;
+    const { activityId } = this.ctx.request.query;
     // 库存 第一天50，第二天50，第三天放开，总：200
     const record = await this.app.mysql.select('activity_info', {
       where: { activity_id: activityId } } );
     // 获取申请单的个数 
     const count = await this.searchApplyCount();
-    const applyInfo = await this.searchApplyInfo(activityId, userId);
     const result = record && record[0] || {};
     const maxCount = result.max_count || 50;
     const startDate = result.start_date || '2019/6/01 8:00';
     const urlRange = result.url_range || 'https://xiaochengxu.autovideogroup.com';
+    const activityStatus  = result.activity_status;
     logger.info('home index:  activity_id= ', activityId); 
 
     if(!result){
@@ -59,8 +46,8 @@ class HomeController extends Controller {
       urlRange,
       count: count,
       startDate,
-      applyInfo: applyInfo,
       maxCount : maxCount,
+      activityStatus,
       data: 'Hello! stock info:' + count,
     };
   }

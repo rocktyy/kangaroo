@@ -8,12 +8,14 @@
       <view class="content-avatar">
         <image class="media" src="../../assets/media.png"></image>
       </view>
-      <button a:if="{{canIUseAuthButton}}" open-type="getAuthorize" 
+      <!--
+        <button a:if="{{canIUseAuthButton}}" open-type="getAuthorize" 
         onGetAuthorize="onGetAuthorize" onError="onAuthError" 
         scope='phoneNumber'>
           {{applyButton}}
         </button>
-      <!-- <button class="content-apply"  type="default"  onTap="getInfo">{{applyButton}}</button> -->
+      -->
+      <button class="content-apply"  type="default"  onTap="getInfo">{{applyButton}}</button> 
       <view a:if="{{applyStatus === 3}}">
         <button class="content-return" type="primary"  onTap="sendBack">{{returnButton}}</button>
       </view>

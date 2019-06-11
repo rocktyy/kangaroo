@@ -1,25 +1,19 @@
 const app = getApp();
+var { tradeNO } = require('../../common/trade');
 
 Page({
   data: {
     count: 0,
     maxCount: 50,
     urlRange: '',
-    applyStatus: 0, //0未申请 1为申请
+    activityStatus: 0, //0未申请 1为申请
     applyButton:'免费体验座椅',
     returnButton:'退还安全座椅',
   },
 
   onShow() {
-    // 页面加载
-    let user = app.userInfo && app.userInfo.userId;
-    if(user){
-      // 首页初始化
-      this.pageInit(user);
-    }
-  },
-
-  onLoad() {
+    // 首页初始化
+    this.pageInit(); 
     my.reportAnalytics('onHomePageLoad', {
       status: 200,
       reason: 'ok'
@@ -59,36 +53,35 @@ Page({
   },
 
   getPhoneNumberAES(param) {
-      var theDemoDomain = app.demoDomain;
-      return new Promise(function (resolve, reject) {
-        my.request({
-          url: theDemoDomain+'/telphone/numberAES', 
-          method: 'POST',
-          data: param,
-          dataType: 'json',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          success: (res) => {
-            resolve(res.data);
-          },
-          fail: function(res) {
-            reject();
-          }
-        });
+    var theDemoDomain = app.demoDomain;
+    return new Promise(function (resolve, reject) {
+      my.request({
+        url: theDemoDomain+'/telphone/numberAES', 
+        method: 'POST',
+        data: param,
+        dataType: 'json',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        success: (res) => {
+          resolve(res.data);
+        },
+        fail: function(res) {
+          reject();
+        }
       });
-    },
-
+    });
+  },
 
   getInfo(){
+    // this.tradePay();
     app.getUserInfo().then(
       user => {
-        this.setData({
-          user,
-        });
+        this.setData({ user });
         app.userInfo = user;
-        // 首页初始化
-        this.pageInit(user.userId);
+        let activityStatus  = this.data.activityStatus;
+        // 跳转弹窗 -- activityStatus 动状态：0未开始1.进行中 2.当日库存售罄 3.活动已结束
+        this.openModal(activityStatus);
       },
       () => {
         // 新建回寄订单
@@ -104,12 +97,9 @@ Page({
   },
 
   pageInit(user){
-    var that =this,
-      activityId = app.activityId,
-      param = {
-        userId: user,
-        activityId
-      };
+    var that =this, param = {
+      activityId: app.activityId || '',
+    };
     // 初始化首页的 数据
     this.getHomeInint(param).then(res=>{
       if(res.success){
@@ -118,12 +108,9 @@ Page({
           count: res.count, 
           maxCount: res.maxCount,
           urlRange: res.urlRange,
-          applyStatus : res.applyInfo && res.applyInfo.applyStatus || 0,
+          activityStatus : res.activityStatus || 0,
         });
-        console.log(res.startDate);
         app.startDate = res.startDate;
-        // 跳转弹窗
-        this.openModal();
       }else{
         // 新建回寄订单
         my.showToast({
@@ -168,18 +155,24 @@ Page({
     return true;
   },
 
-  openModal() {
+  openModal(status) {
     // 活动校验
     if(!this.activityCheck()){
       return;
     }
-    
-    // 跳转 申请单页面
-    var query = '../apply/apply?biz=home';
-    my.navigateTo({
-      url: query
-    })
-
+    if(status === '3'){
+      // 跳转 申请单页面
+      var query = '../apply_search/apply_search?biz=home';
+      my.navigateTo({
+        url: query
+      })
+    }else{
+      // 跳转 申请单页面
+      var query = '../apply/apply?biz=home';
+      my.navigateTo({
+        url: query
+      })
+    }
   },
   onShareAppMessage() {
     // 返回自定义分享信息
@@ -211,22 +204,6 @@ Page({
     my.navigateTo({
       url: '../webview/webview?videoUrl='+urlRange+'/video1.html'
     })
-  },
-
-  tradePay(){
-    my.tradePay({
-      orderStr: 'myOrderStr', //完整的支付参数拼接成的字符串，从服务端获取
-      success: (res) => {
-        my.alert({
-        content: JSON.stringify(res),
-      });
-      },
-      fail: (res) => {
-        my.alert({
-        content: JSON.stringify(res),
-      });
-      }
-    });
   },
 
   getHomeInint(param) {
@@ -273,6 +250,36 @@ Page({
     my.navigateTo({
       url: '../webview/webview?videoUrl='+urlRange+'/video2.html'
     })
+  },
+
+  tradePay(){
+    /* 
+      * 支付宝生成订单： myOrderStr
+      * alipay_sdk=alipay-sdk-java-3.7.73.ALL&app_id=2019051364502296
+      * &biz_content=%7B%22amount%22%3A%220.02%22%2C%22extra_param%22%3A%22%7B%5C%22category%5C%22%3A%5C%22RENT_CAR_GOODS%5C%22%7D%22%2C%22o
+      * rder_title%22%3A%22%E6%94%AF%E4%BB%98%E5%AE%9D%E8%B5%84%E9%87%91%E6%8E%88%E6%9D%83%22%2C%22
+      * out_order_no%22%3A%221559187476230%22%2C%22out_request_no%22%3A%221559187476230%22%2C%22
+      * payee_user_id%22%3A%222088721126886588%22%2C%22product_code%22%3A%22PRE_AUTH_ONLINE%22%7D
+      * &charset=utf-8&format=json&method=alipay.fund.auth.order.app.freeze
+      * &notify_url=http%3A%2F%2Fapp2138419400test.mapp-test.xyz
+      * &sign=x%2BgI7f9CFnBq9Xvce9ywUVpRetM5OSxlyb49f%2FK1gK5UCKEZYefSvdyIVWoGgO7R3%2FCyhfXHlzZkaq4RfnUgaJLGpkfScbFxVv1nO60snEj9kcWcAQI%2FySdAYv6EUnoj9woJlSnNLlR0aOmMG45oNNB51bq770CfEYap%2FRINS8DjRft0sqG5bMHRHmKetJOWBksUabjI1RcoL0M16I9eZxOYd63YPIAWVdK0yIFH89GhahmcAapud9KO3HZlmgbtYvtjn3Ugb5HGKRb%2BKuOObn1gv%2BbW%2F2va8Ozrl4vEjEsQ0rSIJWyHJfNIHaP4ZDjlZoOlA2IAQHCph2nm9cfFmA%3D%3D
+      * &sign_type=RSA2&timestamp=2019-05-30+11%3A37%3A56&version=1.0',
+     */
+    my.tradePay({ 
+      tradeNO: tradeNO,
+      success: (res) => { 
+        my.alert({
+          title:'成功',
+          content: JSON.stringify(res),
+        });
+      },
+      fail: (res) => {
+        my.alert({
+          title:'失败',
+          content: JSON.stringify(res),
+        });
+      }
+    });
   },
 })
 

@@ -2,6 +2,7 @@
 const app = getApp();
 var CountDown = require('../../common/sms/countdown.js');
 var sendSms = require('../../common/sms/sendSms');
+var { tradeNO } = require('../../common/trade');
 
 const applyInfo = {
   name: '姓名',
@@ -315,7 +316,7 @@ Page({
       * &sign_type=RSA2&timestamp=2019-05-30+11%3A37%3A56&version=1.0',
      */
     my.tradePay({ 
-      tradeNO: 'myOrderStr',
+      tradeNO: tradeNO,
       success: (res) => { 
         my.alert({
           title:'成功',
