@@ -3,10 +3,17 @@
 <form onSubmit="formSubmit">
   <view class="page">
     <view class="page-top-img"></view>
-    <view class="page-content">回寄信息填写</view>
+    <view class="page-content">
+        <view a:if="{{!disabled}}"> 
+          回寄信息填写
+        </view>
+        <view a:else> 
+          回寄信息已填写
+        </view>
+      </view>
       <view class="page-section">
         <view class="form-row">
-          <view class="form-row-label">申请人姓名：</view>
+          <view class="form-row-label send-back-label">申请人姓名：</view>
           <view class="form-row-content">
             <input class="input" name="name" disabled = {{disabled}}
               value ={{form.name.value}} placeholder={{form.name.placeholder}}  />
@@ -15,13 +22,22 @@
         <view class="form-row">
           <view class="form-row-label">联系电话：</view>
           <view class="form-row-content">
-            <input class="input" name="telphone_num" 
-             maxlength="11" disabled = {{disabled}} value={{form.telphone_num.value}}  />
+            <input class="input" name="telphone_num"
+              onInput='bindPhoneInput'  maxlength="11"
+              disabled = {{disabled}} value={{form.telphone_num.value}}  />
           </view>
         </view>
-
+        <view a:if="{{!disabled}}"> 
+          <view class="form-row sms-block">
+            <view class="form-row-label">{{smsText}}</view>
+            <view class="form-row-content">
+              <input class="input" name="sms_num" maxlength="6" />
+              <button class="sms-tips" onTap="getSmsCaptcha" disabled='{{captchaDisabled}}'>{{captchaTxt}}</button>
+            </view>
+          </view>
+        </view>
         <view class="form-row">
-          <view class="form-row-label">寄件人地址：</view>
+          <view class="form-row-label send-back-label">寄件人地址：</view>
           <view class="form-row-content">
             <input class="input" name="user_address"
               disabled = {{disabled}} value={{form.user_address.value}} />

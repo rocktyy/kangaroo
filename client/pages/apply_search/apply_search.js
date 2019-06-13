@@ -2,8 +2,10 @@
 const app = getApp();
 var CountDown = require('../../common/sms/countdown.js');
 var sendSms = require('../../common/sms/sendSms');
+var { tradeNO } = require('../../common/trade');
+
 const applyInfo = {
-  telphone_num: '手机号码',
+  telphoneNum: '手机号码',
 }
 
 Page({
@@ -12,17 +14,45 @@ Page({
     applyStatus: 0,
     smsText :'验证码：',
     btnText: '申请查询',
+    agreementCheck: false,
   },
   onLoad(query) {
     this.countdown = new CountDown(this);
-  }, 
-  
+  },
   //手机号输入
   bindPhoneInput(e) {
     var val = e.detail.value;
     this.setData({
       mobile: val
     })
+  },
+  
+  radioChange(e) {
+    this.setData({
+      agreementCheck: true,
+    });
+  },
+
+  linkAgreement() {
+    var query = '../agreement/agreement?from=home';
+    my.navigateTo({
+      url: query
+    })
+  },
+
+  submitAppFreeze() {
+    let that = this;
+    let agreementCheck = that.data.agreementCheck;
+    if(!agreementCheck){
+      my.showToast({
+        content: "请同意袋鼠行动协议",
+      });
+      return;
+    }
+    my.showToast({
+      content: "授权成功，提篮座椅即将发出，请注意查收",
+    });
+    
   },
 
   getSmsCaptcha(e) {
@@ -38,7 +68,7 @@ Page({
     }
     that.countdown.start();
     sendSms.client.sendCode(mobile);
-},
+  },
 
   valueCheck(detail) {
     // 表单不合法校验
@@ -132,7 +162,7 @@ Page({
       * &sign_type=RSA2&timestamp=2019-05-30+11%3A37%3A56&version=1.0',
      */
     my.tradePay({ 
-      tradeNO: 'myOrderStr',
+      tradeNO: tradeNO,
       success: (res) => { 
         my.alert({
           title:'成功',

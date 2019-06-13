@@ -70,7 +70,6 @@ button {
   font-size: 34rpx;
 }
 
-
 .submit-button {
   letter-spacing: 16rpx;
   font-size: 48rpx;

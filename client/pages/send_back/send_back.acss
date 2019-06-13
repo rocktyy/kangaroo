@@ -32,12 +32,36 @@ page {
   margin-bottom: 6rpx;
 }
 
+.send-back-label {
+  width: 240rpx;
+}
+
 .send-back-button {
   letter-spacing: 16rpx;
   font-size: 48rpx;
   color: #fff;
   border-radius: 50rpx;
   background-color: rgb(216, 112, 216);
+}
+
+.sms-block, .birth-certificate {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.sms-tips, .certificate-info {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  color: rgb(216, 112, 216);
+  border:none
+}
+
+.sms-tips {
+  width: 25%;
 }
 
 .footer{

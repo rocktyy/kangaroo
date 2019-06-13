@@ -5,10 +5,10 @@ class SendbackController extends Controller {
 
   async getSendBackInfo() {
     // 从url的query中取得userId
-    var { activity_id, userId } = this.ctx.request.body;
+    var { activity_id, mobile } = this.ctx.request.body;
     var dataInfo = await this.app.mysql.select('send_back_info', {
       where: { 
-        alipay_user_id: userId,
+        telphone_num: mobile,
         activity_id,
       }
     }) || [];

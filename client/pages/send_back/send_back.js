@@ -1,5 +1,6 @@
 const app = getApp();
-
+var CountDown = require('../../common/sms/countdown.js');
+var sendSms = require('../../common/sms/sendSms');
 const sendInfo = {
   name: '寄件人姓名',
   telphone_num: '手机号码',
@@ -29,8 +30,10 @@ Page({
         value: '',
       }
     },
+    mobile: '',
     submitStatus: 'apply',
     disabled: false,
+    smsText :'验证码：',
     array: ['顺丰', '申通', '韵达', '其他'],
     sendAddress: {
       title: '座椅回收信息（运费由袋鼠行动支付，快递时请选择到付）',
@@ -46,20 +49,40 @@ Page({
   onLoad(query) {
     // 页面加载
     console.info(`Page onLoad with query: ${JSON.stringify(query)}`);
+    this.countdown = new CountDown(this);
     this.initPage();
   },
+
+  getMobile(){
+    var mobile = my.getStorageSync({key: 'sms_mobile'}).data + "";
+    return mobile;
+  },
+
   bindPickerChange(e) {
     this.setData({
       index: e.detail.value,
     });
   },
 
+  //手机号输入
+  bindPhoneInput(e) {
+    var val = e.detail.value;
+    this.setData({
+      mobile: val
+    })
+  },
+
+  
+
   initPage(){
+
+    console.log(this.getMobile());
+
     var that =this,
-     userId = app.userInfo && app.userInfo.userId || '10001',
+     mobile = this.getMobile(),
      activity_id = app.activityId,
      param = {
-       userId,
+       mobile,
        activity_id
      };
 
@@ -94,6 +117,45 @@ Page({
     }); 
   },
 
+  getSmsCaptcha(e) {
+    var that = this;
+    var mobile = that.data.mobile;
+    if(mobile == '' || !(/^1(3|4|5|7|8)\d{9}$/.test(mobile))){
+      my.showToast({
+        type: 'none',
+        content: '请输入正确的手机号码',
+        duration: 3000,
+      });
+      return ;
+    }
+    // 查询手机号是否存在订单
+    let param = {
+      telphoneNum: mobile,
+      activity_id: app.activityId,
+    }; 
+    const hasPhoneNum = this.searchApplyChair(param).then(res=>{
+      if(res.data.success){
+        return true;
+      }else{
+        my.showToast({
+          content: "系统繁忙，请重试",
+        });
+        return false;
+      }
+    }); 
+    if(!hasPhoneNum){
+      my.showToast({
+        type: 'none',
+        content: '很抱歉，此号码无效，请核对您填写申领的号码信息，稍后再试',
+        duration: 3000,
+      });
+      return ;
+    }
+
+    that.countdown.start();
+    sendSms.client.sendCode(mobile);
+  },
+
   valueCheck(detail) {
     // 表单不合法校验
     let arr =Object.keys(detail), aaLength = arr.length;
@@ -118,20 +180,17 @@ Page({
     }
     return true;
   },
+
   formSubmit(e) {
     var that =this;
     if(!this.valueCheck(e.detail.value)){
       return;
     }
-
-    var alipay_user_id = '10001';
-    if (app.userInfo) {
-      alipay_user_id = app.userInfo.userId;
-    }
+ 
     let param = {
       ...e.detail.value,
       express_type: this.data.index,
-      alipay_user_id,
+      alipay_user_id: app.userInfo && app.userInfo.userId || '',
     }
     this.addSendBackInfo(param).then(res=>{
       if(res.success){
@@ -193,6 +252,28 @@ Page({
         }
       });
     });
-  }
+  },
+
+  // 查询手机号对应的申请订单
+  searchApplyChair(obj) {
+    var theDemoDomain = app.demoDomain;
+    return new Promise(function (resolve, reject) {
+      my.request({
+        url: theDemoDomain+'/apply/findApply', 
+        method: 'POST',
+        data: obj,
+        dataType: 'json',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        success: (res) => {
+          resolve(res);
+        },
+        fail: function(res) {
+          reject(res);
+        }
+      });
+    });
+  },
 
 });

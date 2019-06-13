@@ -2,8 +2,8 @@
   "pages": [
     "pages/home/home",
     "pages/apply/apply",
-    "pages/apply_search/apply_search",
     "pages/send_back/send_back",
+    "pages/apply_search/apply_search",
     "pages/upload_img/upload_img",
     "pages/agreement/agreement",
     "pages/webview/webview",

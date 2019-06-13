@@ -15,11 +15,12 @@
           {{applyButton}}
         </button>
       -->
-      <button class="content-apply"  type="default"  onTap="getInfo">{{applyButton}}</button> 
-      <view a:if="{{applyStatus === 3}}">
-        <button class="content-return" type="primary"  onTap="sendBack">{{returnButton}}</button>
+      <view class="btn-list">
+        <button class="content-apply"  type="default"  onTap="getInfo">{{applyButton}}</button> 
+        <view a:if="{{activityStatus === 3}}">
+          <button class="content-return" type="primary"  onTap="sendBack">{{returnButton}}</button>
+        </view>
       </view>
-      
     <view class="main">
       <image class="introduce"  src="../../assets/introduce.png" background-size="cover"></image> 
     </view>
@@ -35,10 +36,11 @@
     <view class="bottom-content">
       <image class="bottom-logo"  src="../../assets/bottom_logo.png" background-size="cover" ></image> 
     </view>
-
+    <view a:if="{{activityStatus !== 3}}" class="btn-none"></view>
     <view class="footer">
       <image class="footer-img"  src="../../assets/footer_bg.png" background-size="cover" />
     </view>
   </view>
 
 </view>
+

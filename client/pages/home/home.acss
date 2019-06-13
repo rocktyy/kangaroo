@@ -1,8 +1,13 @@
 
 .page-home {
   width: 100%;
-  height: 2900rpx;
+  height: 3100rpx;
   background-image: url(../../assets/bg.png);
+}
+
+.btn-none{
+  width: 100%;
+  height: 200rpx;
 }
 
 .header-img{
@@ -25,6 +30,7 @@
   width: 562rpx;
   height: 324rpx;
 }
+
 .content-apply, .content-return{
   width: 412rpx;
   letter-spacing: 4rpx;
@@ -95,33 +101,6 @@
   background: #fff;
 }
 
-.agreement {
-  width: 100%;
-  height: 80rpx;
-  line-height: 80rpx;
-  position: relative;
-}
-
-.agreement-radio {
-  display:inline-block;
-}
-
-.agreement-check-radio {
-  position: absolute;
-  left: 80rpx;
-  top:  34rpx;
-}
-
-.agreement-text {
-  margin-left: 40rpx;
-  text-decoration: underline;
-  display: inline-block;
-  font-size: 28rpx;
-  vertical-align: center;
-  height: 80rpx;
-  line-height: 80rpx;
-  border: none;
-}
 .apply-button {
   width: 420rpx;
   margin: 50rpx;

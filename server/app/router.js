@@ -10,6 +10,7 @@ module.exports = app => {
   
   router.get('/users', controller.user.getUserInfo);
   router.post('/apply/init', controller.apply.initApplyInfo);
+  router.post('/apply/findApply', controller.apply.findApplyInfo);
   router.post('/apply/add', controller.apply.addApplyChair);
   router.post('/apply/change', controller.apply.changeState);
   router.post('/sms/sendSms', controller.sms.sendSms);

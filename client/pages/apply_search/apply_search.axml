@@ -3,7 +3,7 @@
 
 <view class="page" a:if="{{applyStatus !== 0}}">
   <view class="main">
-    <view a:if="{{applyStatus === 1}}">
+    <view a:if="{{applyStatus === 1 || applyStatus === 5}}">
       <image class="tips-icon" src="../../assets/right.png" ></image> 
     </view>
     <view a:else="{{applyStatus === 4}}">
@@ -15,18 +15,40 @@
         <view>请等待审核</view>
       </view>
       <view a:else="{{applyStatus === 3}}">
-        <view>恭喜你审核通过，请等待快递</view>
-        <view>
-          <button class="freeze-button" onTap="submitAppFreeze">完成预授权</button>
-          <button class="send-button" onTap="sendBackBtn">座椅寄回</button>
+        <view class="chair-info">您提交的申领座椅信息已通过初步审核，请完成支付宝预授权服务，就可以免费借用座椅啦！</view>
+        <view class="agreement">
+          <radio-group class="agreement-radio" name="agreement-radio" onChange="radioChange">
+            <label class="agreement-check-radio">
+              <radio value={{agreementCheck}}/>
+            </label>
+          </radio-group>
+          <button class="agreement-text" onTap="linkAgreement">同意袋鼠行动相关协议</button> 
         </view>
+        <button class="freeze-button" onTap="submitAppFreeze">完成预授权</button>
       </view>
       <view a:else="{{applyStatus === 4}}">
-        <view>对不起没有申请到, 可以关注生活号，等待下期活动</view>
+        <view class="apply-text">很抱歉，您提交的座椅申领未通过审核,感谢您的支持</view>
       </view>
       <view a:else="{{applyStatus === 2}}">
-        <view>申请状态，退回修改中</view>
+        <view class="apply-text">申请信息，人工修改中</view>
       </view>
+      <view a:else="{{applyStatus === 5}}">
+        <view class="apply-text">
+          <view>申请成功！</view>
+          <view>提篮座椅已发货，请注意查收。</view>
+        </view>
+      </view>
+      <view a:else="{{applyStatus === 6}}">
+        <view class="apply-text">
+          <navigator url="/pages/send_back/send_back" hover-class="navigator-hover" 
+            class="send-back" >
+            已到使用时间，请寄回座椅
+          </navigator>
+        </view>
+      </view>
+      <view a:else>
+        <view class="apply-text">很抱歉，此号码无效，请核对您填写申领时的号码信息，稍后再试</view>
+      </view> 
     </view>
     <favorite type="tips" bottom="10rpx" >收藏小程序，下次使用更方便</favorite>
   </view>

@@ -123,6 +123,31 @@ class ApplyController extends Controller {
     };
   }
 
+  /**
+   * 查询申请表单信息
+   */
+  async findApplyInfo() {
+    // 从url的query中取得userId
+    var { activity_id, userId, telphoneNum } = this.ctx.request.body;
+    const dataInfo = await this.searchApplyInfo(activity_id, telphoneNum);
+    const result = dataInfo && dataInfo[0] || {};
+    if(dataInfo.length === 0){
+      this.ctx.body = {
+        success: false,
+        hasApplyInfo: false,
+        data: '服务正忙，稍后再试'  
+      }
+      return;
+    }
+
+    // 将todo项写入消息体，返回给前端
+    this.ctx.body = {
+      success: true,
+      hasApplyInfo: true,
+    };
+  }
+
+
   async changeState() {
     // 从请求消息体中取得userId
     const { id } = this.ctx.request.body;
