@@ -1,9 +1,7 @@
 // 请修改为您的小程序云应用的真实域名
 const app = getApp();
-var CountDown = require('../../common/sms/countdown.js');
-var sendSms = require('../../common/sms/sendSms');
-var { tradeNO } = require('../../common/trade');
-
+let CountDown = require('../../common/sms/countdown.js');
+let sendSms = require('../../common/sms/sendSms');
 const applyInfo = { 
   telphoneNum: '手机号码',
 }
@@ -15,13 +13,14 @@ Page({
     smsText :'验证码：',
     btnText: '申请查询',
     agreementCheck: false,
+    orderStr: '',
   },
   onLoad(query) {
     this.countdown = new CountDown(this);
   },
   //手机号输入
   bindPhoneInput(e) {
-    var val = e.detail.value;
+    let val = e.detail.value;
     this.setData({
       mobile: val
     })
@@ -34,7 +33,7 @@ Page({
   },
 
   linkAgreement() {
-    var query = '../agreement/agreement?from=home';
+    let query = '../agreement/agreement?from=home';
     my.navigateTo({
       url: query
     })
@@ -49,15 +48,86 @@ Page({
       });
       return;
     }
-    my.showToast({
-      content: "授权成功，提篮座椅即将发出，请注意查收",
+    let order;
+    // 获取支付参数 
+    const orderStr = this.getOrderStr().then(res=>{
+      if(res.success){
+        order = res.orderStr;
+        console.log("order" ,order);
+        // 调用支付
+        that.tradePay(order).then(res=>{
+          console.log("tradePay: res",res);
+          let result = res.result &&  JSON.parse(res.result) || {};
+          let data = result && result.alipay_fund_auth_order_app_freeze_response || {};
+          if(res.resultCode === '6001'){
+            my.showToast({
+              content: "用户主动，取消授权",
+            });
+            return;
+          }
+          if(data.code === '10000'){
+            that.updateRecord(true, data);
+          } else if(data.code === '20000'){
+            that.updateRecord(false);
+            my.showToast({
+              content: "授权失败",
+            });
+          }
+        });
+      } else { 
+       return '';
+      }
     });
+  },
 
+  updateRecord(freezeResult, data){
+    let param = {
+      activityId: app.activityId,
+      telphoneNum: this.data.mobile,
+      freezeResult: freezeResult,
+      data: data,
+    }, that = this;
+    console.log("param", param);
+
+    this.freezeAmount(param).then(res=>{
+      if(res.success){
+        my.showToast({
+          content: "授权成功，提篮座椅即将发出，请注意查收",
+        });
+        that.refreshPage(param);
+      } else {
+        my.showToast({
+          content: "服务正忙，稍后再试",
+        });
+      }
+    }); 
+  },
+
+  // 写入数据库obj，当前用户增加一条todo
+  freezeAmount(obj) {
+    let theDemoDomain = app.demoDomain;
+    return new Promise(function (resolve, reject) {
+      my.request({
+        url: theDemoDomain+'/order/freezeAmount', 
+        method: 'POST',
+        data: obj,
+        dataType: 'json',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        success: (res) => {
+          resolve(res.data);
+        },
+        fail: function(res) {
+          reject(res);
+        }
+      });
+    });
   },
 
   getSmsCaptcha(e) {
-    var that = this;
-    var mobile = that.data.mobile;
+    let that = this;
+    let mobile = that.data.mobile;
     if(mobile == '' || !(/^1(3|4|5|7|8)\d{9}$/.test(mobile))){
       my.showToast({
         type: 'none',
@@ -101,12 +171,17 @@ Page({
     if(!this.valueCheck(e.detail.value)){
       return;
     }
-    var activity_id = app.activityId, imgUrl = app.imgUrl,
-      userId = app.userInfo && app.userInfo.userId,
-      param = {
+    let option = {
        ...e.detail.value,
-       activity_id,
-       userId,
+    };
+    that.refreshPage(option);
+  },
+
+  refreshPage(option){
+    const that = this;
+    let param = {
+       activity_id: app.activityId || '',
+       ...option,
     };
     this.searchApplyChair(param).then(res=>{
       if(res.success){
@@ -127,7 +202,7 @@ Page({
 
   // 写入数据库obj，当前用户增加一条todo
   searchApplyChair(obj) {
-    var theDemoDomain = app.demoDomain;
+    let theDemoDomain = app.demoDomain;
     return new Promise(function (resolve, reject) {
       my.request({
         url: theDemoDomain+'/apply/init', 
@@ -148,21 +223,42 @@ Page({
   },
 
   // 完成支付宝预授权
-  tradePay(){
-    my.tradePay({ 
-      tradeNO: tradeNO,
-      success: (res) => { 
-        my.alert({
-          title:'成功',
-          content: JSON.stringify(res),
-        });
-      },
-      fail: (res) => {
-        my.alert({
-          title:'失败',
-          content: JSON.stringify(res),
-        });
-      }
+  tradePay(orderStr){
+    let theDemoDomain = app.demoDomain;
+    return new Promise(function (resolve, reject) {
+      my.tradePay({ 
+        orderStr: orderStr,
+        success: (res) => {
+          console.log("tradePay: success",res);
+          resolve(res);
+        },
+        fail: (res) => {
+          console.log("tradePay: fail",res);
+          reject(res);
+        }
+      });
+    });
+  },
+
+  // 写入数据库obj，当前用户增加一条todo
+  getOrderStr(obj) {
+    let theDemoDomain = app.demoDomain;
+    return new Promise(function (resolve, reject) {
+      my.request({
+        url: theDemoDomain+'/order/getOrderStr', 
+        method: 'POST',
+        data: obj,
+        dataType: 'json',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        success: (res) => {
+          resolve(res.data);
+        },
+        fail: function(res) {
+          reject(res);
+        }
+      });
     });
   },
 });

@@ -135,6 +135,10 @@ input {
   margin: 20px auto;
 }
 
+.apply-fail{
+  font-size: 14px;
+}
+
 .send-back {
   text-decoration: underline
 }
