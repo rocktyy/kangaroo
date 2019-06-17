@@ -15,10 +15,8 @@ module.exports = app => {
   router.post('/apply/change', controller.apply.changeState);
   router.post('/sms/sendSms', controller.sms.sendSms);
   router.post('/upload', controller.file.upload);
-
   router.post('/sendBack/init', controller.sendback.getSendBackInfo);
   router.post('/sendBack/add', controller.sendback.addAccount);
-  
-  router.post('/order/getTradeNo', controller.order.getTradeNo);
-  
+  router.post('/order/freezeAmount', controller.order.freezeAmount);
+  router.post('/order/getOrderStr', controller.order.getOrderStr);
 };

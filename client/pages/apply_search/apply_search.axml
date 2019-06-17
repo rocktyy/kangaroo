@@ -39,6 +39,13 @@
         </view>
       </view>
       <view a:else="{{applyStatus === 6}}">
+        <view class="apply-text apply-fail">
+          <view>授权失败！ 很抱歉您的支付宝芝麻信用分</view>
+          <view>未满足活动申请条件，请及时联系</view>
+          <view>袋鼠行动客服：15210635193。</view>
+        </view>
+      </view>
+      <view a:else="{{applyStatus === 7}}">
         <view class="apply-text">
           <navigator url="/pages/send_back/send_back" hover-class="navigator-hover" 
             class="send-back" >

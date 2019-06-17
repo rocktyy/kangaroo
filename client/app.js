@@ -41,7 +41,6 @@ App({
     return new Promise((resolve, reject) => {
       if (this.authCode) resolve(this.authCode);
       // 冻结
-      
     });
   },
 });

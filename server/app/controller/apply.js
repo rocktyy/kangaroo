@@ -1,5 +1,5 @@
-  'use strict';
-const Controller = require('egg').Controller; 
+'use strict';
+const Controller = require('egg').Controller;
 
 class ApplyController extends Controller {
   /**

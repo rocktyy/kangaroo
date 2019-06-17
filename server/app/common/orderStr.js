@@ -1,0 +1,5 @@
+const orderStr = "alipay_sdk=alipay-sdk-java-3.7.73.ALL&app_id=2019051364502296&biz_content=%7B%22amount%22%3A%220.02%22%2C%22extra_param%22%3A%22%7B%5C%22category%5C%22%3A%5C%22RENT_CAR_GOODS%5C%22%7D%22%2C%22order_title%22%3A%22%E6%94%AF%E4%BB%98%E5%AE%9D%E8%B5%84%E9%87%91%E6%8E%88%E6%9D%83%22%2C%22out_order_no%22%3A%221560440080105%22%2C%22out_request_no%22%3A%221560440080105%22%2C%22payee_user_id%22%3A%222088721126886588%22%2C%22product_code%22%3A%22PRE_AUTH_ONLINE%22%7D&charset=utf-8&format=json&method=alipay.fund.auth.order.app.freeze&notify_url=http%3A%2F%2Fapp2138419400test.mapp-test.xyz&sign=rAunw%2Bwid7OC78%2Bs99M5O8h7D3mA%2FUEtrXfiOMwQgz3dPT%2BXYBLiO8pSAKlN%2B%2BnRCoLsEetMsxcRqGQHujmCVuuFG0GgU4W475YgfylFt%2BuP5LdeUsqQ5zKKGW7LafkwR%2FS%2Bwrc9%2F9ZOrp0AoY%2FOZszJL3S6V85dqBIy8ZuwKooNwy7EAAcsqBoVfOLHpidd9b2KkPipctxTRROppLHwh1PczkCF%2BH9SwldlXA2TnBN44IfojjRqTwB%2FKrIUXHew3moOCW4vMpwHl2RurYjMkDDVKLeIIFsE6vhazWGyynR5ojz%2BofPqxY%2Bmdtepmyn2drWiIwiq2EhCGPs8juWq4w%3D%3D&sign_type=RSA2&timestamp=2019-06-13+23%3A34%3A40&version=1.0";
+
+module.exports = {
+  orderStr
+};
