@@ -48,9 +48,11 @@ Page({
       });
       return;
     }
-    let order;
+    let order, param = { 
+      mobile: that.data.mobile
+    };
     // 获取支付参数 
-    const orderStr = this.getOrderStr().then(res=>{
+    const orderStr = this.getOrderStr(param).then(res=>{
       if(res.success){
         order = res.orderStr;
         console.log("order" ,order);

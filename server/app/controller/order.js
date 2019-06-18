@@ -6,10 +6,10 @@ const AlipaySdk = require('alipay-sdk').default;
 const order = require('../common/orderStr');
 
 class OrderController extends Controller {
-  getOrder() {
+  getOrder(mobile) {
     return new Promise((resolve, reject) => { 
       var exec = require('child_process').exec;
-      var exec_path = "java -jar jar/test.jar";
+      var exec_path = "java -jar jar/test.jar  " + mobile;
       var data, child;
       child = exec(exec_path, function (error, stdout, stderr){  
         if(error !== null){
@@ -26,8 +26,9 @@ class OrderController extends Controller {
 
   async getOrderStr(){
     const { logger } = this.ctx;
+    const { mobile } = this.ctx.request.body;
     const that = this;
-    const result = await this.getOrder(); 
+    const result = await this.getOrder(mobile); 
     if(result === 'error'){
       that.ctx.body = {
         success: false, 
