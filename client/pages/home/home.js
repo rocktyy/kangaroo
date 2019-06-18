@@ -203,7 +203,7 @@ Page({
     var theDemoDomain = app.demoDomain;
     return new Promise(function (resolve, reject) {
       my.request({
-        url: theDemoDomain+'/home?activityId='+param.activityId+'&userId='+param.userId,
+        url: theDemoDomain+'/home?activityId='+param.activityId,
         success: (res) => {
           console.log(res)
           resolve(res.data);
