@@ -9,7 +9,6 @@ App({
   // 请修改为您的小程序云应用的真实域名
   demoDomain: 'https://kangarooaaction.autovideogroup.com',
 
-
   getUserInfo() {
     var theDemoDomain = this.demoDomain;
     return new Promise((resolve, reject) => {
