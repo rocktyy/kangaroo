@@ -34,8 +34,8 @@
       </view>
       <view a:else="{{applyStatus === 5}}">
         <view class="apply-text">
-          <view>申请成功！</view>
-          <view>提篮座椅已发货，请注意查收。</view>
+          <view>授权成功！</view>
+          <view>提篮座椅即将发出，请注意查收！如一周内未收到安全座椅，请联系客服电话（15210635193）</view>
         </view>
       </view>
       <view a:else="{{applyStatus === 6}}">

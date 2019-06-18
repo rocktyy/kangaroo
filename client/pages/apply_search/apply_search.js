@@ -185,9 +185,6 @@ Page({
     };
     this.searchApplyChair(param).then(res=>{
       if(res.success){
-        my.showToast({
-          content:  "查询成功！",
-        });
         that.setData({
           applyStatus: res.data,
           apply: res.apply
