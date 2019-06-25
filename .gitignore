@@ -1,4 +1,5 @@
 client/.tea/
+client/package-lock.json
 client/node_modules/
 server/node_modules/
 server/config/
